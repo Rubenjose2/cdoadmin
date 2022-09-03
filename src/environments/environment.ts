@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyBTah9GByl1JFYOiVboFd0J0dCQalG14kE",
+    authDomain: "cdopeople.firebaseapp.com",
+    databaseURL: "https://cdopeople-default-rtdb.firebaseio.com",
+    projectId: "cdopeople",
+    storageBucket: "cdopeople.appspot.com",
+    messagingSenderId: "994022546622",
+    appId: "1:994022546622:web:d22678c2529adbb42912ef",
+    measurementId: "G-VSD8CPKYGR"
+  }
 };
 
 /*

@@ -11,10 +11,13 @@ import {MatTableModule} from '@angular/material/table';
 import { UsersComponent } from './users/users.component';
 import { MenuComponent } from './partials/menu/menu.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { SidenavComponent } from './partials/sidenav/sidenav.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { environment } from '../environments/environment';
 
-
+//Import from Firebase
 
 
 @NgModule({
@@ -24,7 +27,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     EncuentrosComponent,
     UsersComponent,
     MenuComponent,
-    SidenavComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,11 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatTableModule,
     MatToolbarModule,
     MatSidenavModule,
-  ],
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
