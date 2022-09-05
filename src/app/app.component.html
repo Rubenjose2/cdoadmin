@@ -10,12 +10,19 @@
             </li>
             <li>
                 <a routerLink="encuentros">Encuentros</a>
+                <ul>
+                    <li>Varones</li>
+                    <li>Mujeres</li>
+                </ul>
             </li>
         </ul>
         
     </mat-sidenav>
     <mat-sidenav-content>
         <app-menu></app-menu>
-        <router-outlet></router-outlet>
+        <div class="main-container">
+            <router-outlet></router-outlet>
+        </div>
+
     </mat-sidenav-content>
 </mat-sidenav-container>
