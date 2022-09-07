@@ -14,6 +14,7 @@ export class EncuentrosComponent implements OnInit{
   dataSource:any = [];
   private VARONES = "Encuentro de Varones | Men's Encounter";
   private MUJERES = "Encuentro de Damas | Women's Encounter";
+  eventName: string = '';
 
   constructor(
     private peopleService: PeopleService,
@@ -36,9 +37,11 @@ export class EncuentrosComponent implements OnInit{
     switch (params['type']) {
       case 'varones':
         this.getPeopleByEvent(this.VARONES);
+        this.eventName = this.VARONES;
         break;
       case 'mujeres':
         this.getPeopleByEvent(this.MUJERES);
+        this.eventName = this.MUJERES;
         break;
       default:
         break;
