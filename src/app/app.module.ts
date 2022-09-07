@@ -18,6 +18,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from '../environments/environment';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { DiscipulosComponent } from './newLife/discipulos/discipulos.component';
 
 
 //Import from Firebase
@@ -30,6 +31,7 @@ import { MatSelectModule } from '@angular/material/select';
     EncuentrosComponent,
     UsersComponent,
     MenuComponent,
+    DiscipulosComponent,
     
   ],
   imports: [

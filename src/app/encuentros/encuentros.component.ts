@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { PeopleService } from '../services/people.service';
 
 
@@ -11,9 +12,12 @@ import { PeopleService } from '../services/people.service';
 export class EncuentrosComponent implements OnInit{
 
   dataSource:any = [];
+  private VARONES = "Encuentro de Varones | Men's Encounter";
+  private MUJERES = "Encuentro de Damas | Women's Encounter";
 
   constructor(
-    private peopleService: PeopleService
+    private peopleService: PeopleService,
+    private route: ActivatedRoute
 
   ) { }
 
@@ -28,11 +32,23 @@ export class EncuentrosComponent implements OnInit{
   ]
 
  ngOnInit(): void { 
-  this.getPeopleByEvent();
+  this.route.queryParams.subscribe(params => {
+    switch (params['type']) {
+      case 'varones':
+        this.getPeopleByEvent(this.VARONES);
+        break;
+      case 'mujeres':
+        this.getPeopleByEvent(this.MUJERES);
+        break;
+      default:
+        break;
+    }
+    
+  })
  }
 
-  getPeopleByEvent(){
-    this.peopleService.getPeopleByEvent$("Encuentro de Varones | Men's Encounter").subscribe(data =>{
+  getPeopleByEvent(eventType:string){
+    this.peopleService.getPeopleByEvent$(eventType).subscribe(data =>{
       console.log(data);
       this.dataSource = data.map((e:any) =>{
         return {

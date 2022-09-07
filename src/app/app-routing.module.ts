@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EncuentrosComponent } from './encuentros/encuentros.component';
 import { HomeComponent } from './home/home.component';
+import { DiscipulosComponent } from './newLife/discipulos/discipulos.component';
 import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
@@ -16,6 +17,11 @@ const routes: Routes = [
   {
     path: 'encuentros',
     component: EncuentrosComponent
+  },
+  //New Life Routing
+  {
+    path:'newlife/discipuladores',
+    component: DiscipulosComponent
   }
 ];
 
