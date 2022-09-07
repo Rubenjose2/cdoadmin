@@ -23,13 +23,15 @@ export class EncuentrosComponent implements OnInit{
   ) { }
 
   displayedColumns: string[] = [
+    'No',
     'FullName',
     'PhoneNumber',
     'Email',
     'ReferedBy',
     'ChuchFrom',
     'EmergencyContact',
-    'Translation'
+    'Translation',
+    'Age'
   ]
 
  ngOnInit(): void { 
@@ -62,7 +64,8 @@ export class EncuentrosComponent implements OnInit{
           referedBy: e.refered_by,
           churchFrom: e.church_from,
           translation: e.translation,
-          emergencyContact:e.emergency_contact
+          emergencyContact:e.emergency_contact,
+          age:e.age
         }
       })
     })
