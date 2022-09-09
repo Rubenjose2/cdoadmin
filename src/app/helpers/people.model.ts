@@ -9,5 +9,11 @@ export interface PeopleModel {
     emergency_contract?: string,
     relationship?: string,
     translation?: string,
-    emergency_phone?: string
+    emergency_phone?: string,
+    encuentroID?: string,
+    maletas?: string,
+    pago?:string,
+    grupo?:string,
+    descuento?:string,
+    sponsor?:string
 }

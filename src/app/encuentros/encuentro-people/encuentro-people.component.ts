@@ -4,6 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { pipe, take } from 'rxjs';
 import { PeopleService } from 'src/app/services/people.service';
 import { Location } from '@angular/common';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { EncuentrosService } from 'src/app/services/encuentros.service';
+
+
 
 @Component({
   selector: 'app-encuentro-people',
@@ -15,18 +19,23 @@ export class EncuentroPeopleComponent implements OnInit {
   newObj:any = '';
   encuentroForm!: FormGroup;
   peopleIdParam:string = '';
+  encuentroObj:any = '';
+  encuentroGrupos: string[] = ['Rojo', 'Azul', 'Verde', 'Amarillo', 'Rosado']
   
 
   ageOptions:string[] = ['13-19','20-29','30-39','40-49','50-59','60-69','70+'];
  
   constructor(
     private peopleService: PeopleService,
+    private encuentroService: EncuentrosService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
     this.createForm();
+    this.getEncuentrosList();
     this.route.queryParams.subscribe((param:any) => {
 
       this.peopleIdParam = param['sys_id'];
@@ -45,7 +54,13 @@ export class EncuentroPeopleComponent implements OnInit {
           emergency_contact: res.emergency_contact || '',
           relationship: res.relationship || '',
           translation: res.translation || '',
-          emergency_phone: res.emergency_phone || ''
+          emergency_phone: res.emergency_phone || '',
+          encuentroID: res.encuentroID|| '',
+          maletas: res.maletas || '',
+          grupo: res.grupo || '',
+          pago: res.pago || '',
+          descuento: res.descuento || '',
+          sponsor: res.sponsor || ''
         })
       });      
     })
@@ -67,7 +82,20 @@ export class EncuentroPeopleComponent implements OnInit {
       emergency_contact: new FormControl(),
       relationship: new FormControl(),
       translation: new FormControl(),
-      emergency_phone: new FormControl()
+      emergency_phone: new FormControl(),
+      encuentroID: new FormControl(),
+      maletas: new FormControl(),
+      grupo: new FormControl(),
+      pago: new FormControl(),
+      descuento: new FormControl(),
+      sponsor: new FormControl()
+    })
+  }
+
+  getEncuentrosList(){
+    this.encuentroService.getEncuentrosList().subscribe(res =>{
+      console.log(res);
+      this.encuentroObj = res;
     })
   }
 
@@ -78,13 +106,25 @@ export class EncuentroPeopleComponent implements OnInit {
   }
 
   delete(){
-    this.peopleService.deletePeople(this.peopleIdParam);
-    this.location.back();
-
+    this.dialog.open(DialogPeopleDeleteConfirmation, {
+      width:'350px'
+    }).afterClosed().subscribe(res =>{
+      if(res == 'true'){
+        this.peopleService.deletePeople(this.peopleIdParam);
+        this.location.back();
+      }
+    });
   }
 
   cancel(){
     this.location.back();
   }
 
+}
+@Component({
+  selector: 'dialog-people-delete-confirmation',
+  templateUrl: 'dialog-people-delete-confirmation.html',
+})
+export class DialogPeopleDeleteConfirmation{
+  constructor(public dialogRef: MatDialogRef<DialogPeopleDeleteConfirmation>) {}
 }

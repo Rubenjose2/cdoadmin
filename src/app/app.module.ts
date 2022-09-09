@@ -21,13 +21,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { DiscipulosComponent } from './newLife/discipulos/discipulos.component';
 import { LoginComponent } from './users/login/login.component';
 import { HomeRoutingModule } from './home/home-routing.module';
-import { EncuentroPeopleComponent } from './encuentros/encuentro-people/encuentro-people.component';
+import { DialogPeopleDeleteConfirmation, EncuentroPeopleComponent } from './encuentros/encuentro-people/encuentro-people.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule} from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatDividerModule} from '@angular/material/divider';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -44,6 +45,7 @@ import {MatDividerModule} from '@angular/material/divider';
     DiscipulosComponent,
     LoginComponent,
     EncuentroPeopleComponent,
+    DialogPeopleDeleteConfirmation
     
   ],
   imports: [
@@ -66,7 +68,9 @@ import {MatDividerModule} from '@angular/material/divider';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatRadioModule,
-    MatDividerModule
+    MatDividerModule,
+    MatRadioModule,
+    MatDialogModule,
     
     
     ],

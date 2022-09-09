@@ -57,13 +57,60 @@
     </div>
   
     <div>
-        <h3>Informacion del Encuentro</h3>
+        <h2>Informacion del Encuentro</h2>
         <mat-radio-group formControlName="translation">
             <mat-label>Necesita Traduccion: </mat-label>
             <mat-radio-button value="Yes">Yes</mat-radio-button>
             <mat-radio-button value="No">No</mat-radio-button>
         </mat-radio-group>
+        <div class="registracion">
+            <h3>Registracion</h3>
+            <mat-divider></mat-divider>
+            <div class="section-divider">
+                <mat-radio-group formControlName="translation">
+                    <mat-label>CHECK_IN:  </mat-label>
+                    <mat-radio-button value="Yes">Yes</mat-radio-button>
+                    <mat-radio-button value="No">No</mat-radio-button>
+                </mat-radio-group>
+                <div class="space-top-20">
+                    <mat-form-field  appearance="fill">
+                        <mat-label>Nombre del Encuentro</mat-label>
+                        <mat-select formControlName="encuentroID">
+                            <mat-option *ngFor="let encuentro of encuentroObj;" [value]="encuentro.encuentroID">{{encuentro.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field  appearance="fill">
+                        <mat-label>Maletas #</mat-label>
+                        <input matInput type="number" formControlName="maletas">
+                    </mat-form-field>
+                    <mat-form-field  appearance="fill">
+                        <mat-label>Grupo</mat-label>
+                        <mat-select formControlName="grupo">
+                            <mat-option *ngFor="let enGrupo of encuentroGrupos;" [value]="enGrupo">{{enGrupo}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field  appearance="fill">
+                        <mat-label>Pago</mat-label>
+                        <textarea matInput formControlName="pago"></textarea>
+                    </mat-form-field>
+
+                    <mat-form-field  appearance="fill">
+                        <mat-label>Descuento</mat-label>
+                        <input matInput type="number" formControlName="descuento">
+                        <span matPrefix>$&nbsp;</span>
+                        <span matSuffix>.00</span>
+                    </mat-form-field>
+                    <mat-form-field  appearance="fill">
+                        <mat-label>Sponsor</mat-label>
+                        <textarea matInput formControlName="sponsor"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
     </div>
+    
     <!-- Buttons Sections -->
 <div class="button-section">
     <section>

@@ -1,3 +1,4 @@
+import { group } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PeopleService } from '../services/people.service';
@@ -31,7 +32,8 @@ export class EncuentrosComponent implements OnInit{
     'ChuchFrom',
     'EmergencyContact',
     'Translation',
-    'Age'
+    'Age',
+    'Group'
   ]
 
  ngOnInit(): void { 
@@ -66,7 +68,8 @@ export class EncuentrosComponent implements OnInit{
           churchFrom: e.church_from,
           translation: e.translation,
           emergencyContact:e.emergency_contact,
-          age:e.age
+          age:e.age,
+          group: e.grupo
         }
       })
     })

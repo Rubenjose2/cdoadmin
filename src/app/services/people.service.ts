@@ -15,7 +15,7 @@ export class PeopleService {
     private db: AngularFirestore){}
 
   getPeople(){
-    return this.db.collection(this.basePath).snapshotChanges();
+    return this.db.collection(this.basePath, ref => ref.orderBy('grupo')).snapshotChanges();
   }
 
   getPeopleByEvent$(event:string):Observable<any>{
@@ -34,6 +34,16 @@ export class PeopleService {
 
   updatePeople(id:string, peopleObj:PeopleModel){
     this.db.collection('people').doc(id).update(peopleObj);
+    //search for subcollection update or create
+
+    this.db.collection(`people/${id}/encuentros`).doc(peopleObj.encuentroID).set({
+      encID: peopleObj.encuentroID,
+      maletas: peopleObj.maletas,
+      grupo: peopleObj.grupo,
+      pago: peopleObj.pago,
+      descuento: peopleObj.descuento,
+      sponsor: peopleObj.sponsor
+    })
   }
 
   deletePeople(id:string){
