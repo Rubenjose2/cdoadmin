@@ -1,0 +1,80 @@
+<h2>Informacion de Participante</h2>
+
+<form [formGroup]="encuentroForm">
+    <!-- Personal Information Section -->
+    <h3>Information Personal</h3>
+    <div>
+        <mat-form-field  appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="last_name">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field  appearance="fill">
+            <mat-label>Telefono</mat-label>
+            <input matInput type="tel" formControlName="phone">
+        </mat-form-field>
+    </div>
+
+    <h3>Informacion General</h3>
+    <div>
+        <mat-form-field  appearance="fill">
+            <mat-label>Edad</mat-label>
+            <mat-select formControlName="age">
+                <mat-option *ngFor="let option of ageOptions;" [value]="option">{{option}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field  appearance="fill">
+            <mat-label>Referido por</mat-label>
+            <input matInput formControlName="refered_by">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Iglesia</mat-label>
+            <input matInput formControlName="church_from">
+        </mat-form-field>
+    </div>
+
+    <div>
+        <h3>Contacto de Emergencia</h3>
+        <mat-form-field  appearance="fill">
+            <mat-label>Persona de contacto de Emergencia</mat-label>
+            <input matInput formControlName="emergency_contact">
+        </mat-form-field>
+        <mat-form-field  appearance="fill">
+            <mat-label>Telefono contacto de Emergencia</mat-label>
+            <input matInput formControlName="emergency_phone">
+        </mat-form-field>
+        <mat-form-field  appearance="fill">
+            <mat-label>Relacion</mat-label>
+            <input matInput formControlName="relationship">
+        </mat-form-field>
+    </div>
+  
+    <div>
+        <h3>Informacion del Encuentro</h3>
+        <mat-radio-group formControlName="translation">
+            <mat-label>Necesita Traduccion: </mat-label>
+            <mat-radio-button value="Yes">Yes</mat-radio-button>
+            <mat-radio-button value="No">No</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <!-- Buttons Sections -->
+<div class="button-section">
+    <section>
+        <div class="section-button-row">
+            <button mat-raised-button color="primary" type="submit" (click)="save()">Guardar</button>
+            <button mat-raised-button color="warn" (click)="delete()">Eliminar</button>
+            <button mat-raised-button (click)="cancel()">Cancelar</button>
+        </div>
+    </section>
+</div>
+</form>
+
+
+

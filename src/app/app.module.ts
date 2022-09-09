@@ -19,6 +19,16 @@ import { environment } from '../environments/environment';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { DiscipulosComponent } from './newLife/discipulos/discipulos.component';
+import { LoginComponent } from './users/login/login.component';
+import { HomeRoutingModule } from './home/home-routing.module';
+import { EncuentroPeopleComponent } from './encuentros/encuentro-people/encuentro-people.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule} from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatDividerModule} from '@angular/material/divider';
+
 
 
 //Import from Firebase
@@ -32,6 +42,8 @@ import { DiscipulosComponent } from './newLife/discipulos/discipulos.component';
     UsersComponent,
     MenuComponent,
     DiscipulosComponent,
+    LoginComponent,
+    EncuentroPeopleComponent,
     
   ],
   imports: [
@@ -47,6 +59,15 @@ import { DiscipulosComponent } from './newLife/discipulos/discipulos.component';
     AngularFireAuthModule,
     MatSnackBarModule,
     MatSelectModule,
+    HomeRoutingModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    MatDividerModule
+    
     
     ],
   providers: [],
