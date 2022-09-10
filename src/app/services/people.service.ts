@@ -37,6 +37,7 @@ export class PeopleService {
     //search for subcollection update or create
 
     this.db.collection(`people/${id}/encuentros`).doc(peopleObj.encuentroID).set({
+      checkIn: peopleObj.checkIn,
       encID: peopleObj.encuentroID,
       maletas: peopleObj.maletas,
       grupo: peopleObj.grupo,

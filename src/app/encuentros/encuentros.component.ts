@@ -69,7 +69,8 @@ export class EncuentrosComponent implements OnInit{
           translation: e.translation,
           emergencyContact:e.emergency_contact,
           age:e.age,
-          group: e.grupo
+          group: e.grupo,
+          checkIn: e.checkIn
         }
       })
     })

@@ -60,7 +60,8 @@ export class EncuentroPeopleComponent implements OnInit {
           grupo: res.grupo || '',
           pago: res.pago || '',
           descuento: res.descuento || '',
-          sponsor: res.sponsor || ''
+          sponsor: res.sponsor || '',
+          checkIn: res.checkIn || ''
         })
       });      
     })
@@ -88,7 +89,8 @@ export class EncuentroPeopleComponent implements OnInit {
       grupo: new FormControl(),
       pago: new FormControl(),
       descuento: new FormControl(),
-      sponsor: new FormControl()
+      sponsor: new FormControl(),
+      checkIn: new FormControl()
     })
   }
 
@@ -109,7 +111,9 @@ export class EncuentroPeopleComponent implements OnInit {
     this.dialog.open(DialogPeopleDeleteConfirmation, {
       width:'350px'
     }).afterClosed().subscribe(res =>{
-      if(res == 'true'){
+
+      if(res){
+        console.log(res);
         this.peopleService.deletePeople(this.peopleIdParam);
         this.location.back();
       }
