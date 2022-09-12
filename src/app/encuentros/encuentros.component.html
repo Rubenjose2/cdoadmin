@@ -1,6 +1,13 @@
 <h2>Encuentro de {{eventName}}</h2>
 <div>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+  <div class="button-section">
+    <section>
+        <div class="section-button-row">
+            <button mat-raised-button color="basic" type="submit" (click)="exportToExcel()">Export to Excel</button>
+        </div>
+    </section>
+</div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z0" #peopleTable>
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->

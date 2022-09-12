@@ -1,7 +1,10 @@
 import { group } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatTable } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { ExportExcelService } from '../services/export-excel.service';
 import { PeopleService } from '../services/people.service';
+import * as XLSX from 'xlsx';
 
 
 
@@ -19,7 +22,8 @@ export class EncuentrosComponent implements OnInit{
 
   constructor(
     private peopleService: PeopleService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private exportServices: ExportExcelService
 
   ) { }
 
@@ -68,12 +72,17 @@ export class EncuentrosComponent implements OnInit{
           churchFrom: e.church_from,
           translation: e.translation,
           emergencyContact:e.emergency_contact,
+          emergencyPhone: e.emergency_phone,
           age:e.age,
           group: e.grupo,
           checkIn: e.checkIn
         }
       })
     })
+  }
+
+  exportToExcel():void{
+    this.exportServices.exportTableElmToExcel(this.dataSource,'encuentro_data');
   }
 
 }
