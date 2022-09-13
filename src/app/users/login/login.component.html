@@ -1,1 +1,40 @@
-<p>login works!</p>
+<h1>Welcome to CDO People</h1>
+<h2>Login Page</h2>
+
+<form [formGroup]="logInForm">
+    <div>
+        <mat-form-field  appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email">
+            <mat-error *ngIf="submitted && f['email'].errors">
+                email required
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field  appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="submitted && f['password'].errors">
+                password required
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <section>
+            <div>
+                <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">submit</button>
+            </div>
+        </section>
+    </div>
+    <div *ngIf="authError">
+        <div>
+            Access Denied
+        </div>
+    </div>
+</form>
+

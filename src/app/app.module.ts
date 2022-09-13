@@ -29,6 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatDividerModule} from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -71,6 +72,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDividerModule,
     MatRadioModule,
     MatDialogModule,
+    MatIconModule
     
     
     ],

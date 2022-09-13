@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
 import { UserModel } from '../helpers/user.model';
 
 @Injectable({
@@ -11,22 +11,44 @@ import { UserModel } from '../helpers/user.model';
 export class AuthService {
 
   userData$: Observable<any>;
+  private eventAuthError = new BehaviorSubject<string>("");
+  eventAutError$ = this.eventAuthError.asObservable();
 
   constructor(
     private afAuth: AngularFireAuth,
     private db: AngularFirestore,
-    private route: Router,
+    private route: Router
   ) { 
     this.userData$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if(user){
-          return this.db.doc<UserModel>(`user/${user.uid}`).valueChanges();
+          return this.db.doc<UserModel>(`users/${user.uid}`).valueChanges();
         }else{
           return of(null);
         }
       })
     )
   }
+
+   /**
+   * Function to use Regular login with Email and password
+   * @param email
+   * @param password
+   */
+
+    login( email:string, password: string  ) {
+      this.afAuth.signInWithEmailAndPassword(email,password)
+      .catch(error => {
+        this.eventAuthError.next(error);
+      })
+      .then(userCredential => {
+        if(userCredential){
+          this.route.navigate(['']);
+        }
+        
+      })
+    }
+    
 
   
 }
