@@ -30,6 +30,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatDividerModule} from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
+import { RegistrationComponent } from './users/registration/registration.component';
 
 
 
@@ -46,7 +47,8 @@ import {MatIconModule} from '@angular/material/icon';
     DiscipulosComponent,
     LoginComponent,
     EncuentroPeopleComponent,
-    DialogPeopleDeleteConfirmation
+    DialogPeopleDeleteConfirmation,
+    RegistrationComponent
     
   ],
   imports: [

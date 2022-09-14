@@ -20,4 +20,8 @@ export class UsersService {
   public updateUser(user: UserModel) {
     return this.db.collection(this.basePath).doc(user.uid).update(user);
   }
+
+  public getUser(userID?:string){
+    return this.db.doc(`users/${userID}`).snapshotChanges();
+  }
 }

@@ -6,7 +6,11 @@ import { AuthGuard } from './guard/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { DiscipulosComponent } from './newLife/discipulos/discipulos.component';
 import { LoginComponent } from './users/login/login.component';
+import { RegistrationComponent } from './users/registration/registration.component';
 import { UsersComponent } from './users/users.component';
+import { canActivate } from '@angular/fire/compat/auth-guard';
+import { pipe } from 'rxjs';
+import { RolesGuard } from './guard/roles.guard';
 
 const routes: Routes = [
   {
@@ -15,7 +19,7 @@ const routes: Routes = [
     children:[
       {
         path:'users',
-        component:UsersComponent
+        component:UsersComponent, canActivate: [RolesGuard]
       },
       {
         path: 'encuentros',
@@ -40,6 +44,10 @@ const routes: Routes = [
   {
     path:'login',
     component: LoginComponent
+  },
+  {
+    path:'registration',
+    component: RegistrationComponent
   }
 ];
 
