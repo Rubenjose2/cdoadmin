@@ -22,6 +22,6 @@ export class UsersService {
   }
 
   public getUser(userID?:string){
-    return this.db.doc(`users/${userID}`).snapshotChanges();
+    return this.db.doc(`users/${userID}`).valueChanges();
   }
 }

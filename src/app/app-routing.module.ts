@@ -19,7 +19,7 @@ const routes: Routes = [
     children:[
       {
         path:'users',
-        component:UsersComponent, canActivate: [RolesGuard]
+        component:UsersComponent, canActivate: [RolesGuard], data:{role:['superAdmin']}
       },
       {
         path: 'encuentros',

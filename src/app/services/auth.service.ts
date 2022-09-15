@@ -15,6 +15,7 @@ export class AuthService {
   private eventAuthError = new BehaviorSubject<string>("");
   eventAutError$ = this.eventAuthError.asObservable();
   private newUser!: UserModel;
+  private userInfo:any = '';
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -46,6 +47,7 @@ export class AuthService {
       })
       .then(userCredential => {
         if(userCredential){
+          this.setCurrenUserInfo(); // <- Saving into the Local Storage
           this.route.navigate(['']);
         }
         
@@ -68,8 +70,7 @@ export class AuthService {
 
     private insertUserData(userCredential: any) {
       let rolesModel = new Roles;
-      console.log(userCredential);
-      console.log(this.newUser);
+
       return this.db.doc(`users/${userCredential.user.uid}`).set({
         email: this.newUser.email,
         firstName: this.newUser.firstName,
@@ -82,6 +83,7 @@ export class AuthService {
     }
 
     logout() {
+      localStorage.removeItem('user');
       return this.afAuth.signOut();
     }
 
@@ -89,20 +91,20 @@ export class AuthService {
       return this.afAuth.authState !=null;
     }
 
+    // This function is in chage to save the user Information on the local Storage
+    setCurrenUserInfo(){
+      this.afAuth.authState.subscribe(user =>{
+        this.userService.getUser(user?.uid).subscribe((data:any) => {
+          localStorage.setItem('user',JSON.stringify(data));
+        })
+      })
+    }
+
     hasRole(role:string){
 
       this.afAuth.authState.subscribe(user =>{
-        this.userService.getUser(user?.uid).subscribe((response:any) =>{
-          let userData = response.payload.data();
-          console.log(userData);
-          userData.role.every((element: any) => {
-            if(element && element.indexOf(role) === -1){
-              console.log('have the role');
-            }
-          });
-        })
+        this.userService.getUser(user?.uid).subscribe()
       })
-      return true;
-}
+    }
     
 }
