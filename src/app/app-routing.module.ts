@@ -11,6 +11,7 @@ import { UsersComponent } from './users/users.component';
 import { canActivate } from '@angular/fire/compat/auth-guard';
 import { pipe } from 'rxjs';
 import { RolesGuard } from './guard/roles.guard';
+import { AsignacionesComponent } from './newLife/asignaciones/asignaciones.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
           {
             path:'discipuladores',
             component:DiscipulosComponent
+          },
+          {
+            path:'asignaciones',
+            component:AsignacionesComponent
           }
         ]
       }

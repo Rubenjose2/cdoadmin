@@ -1,0 +1,22 @@
+<!-- This section it's going to be selector | A B C ... -->
+<div class="main-container">
+    <div class="main-container-selector">
+        The selector Go here
+        <div>
+            A  B  C  D  E
+        </div>
+    </div>
+    <div class="main-container-transaction">
+        <div class="main-container-consolidation">
+            <mat-card>Simple card</mat-card>
+        </div>
+        <div class="main-container-people">
+            <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+                <div class="example-box"  *ngFor="let people of peopleModel"cdkDrag>
+                  <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+                    {{people.firstName}}  {{people.lastName}}
+                </div>
+              </div>
+        </div>
+    </div>
+</div>

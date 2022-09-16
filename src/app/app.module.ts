@@ -31,6 +31,10 @@ import {MatDividerModule} from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import { RegistrationComponent } from './users/registration/registration.component';
+import {MatCardModule} from '@angular/material/card';
+import { AsignacionesComponent } from './newLife/asignaciones/asignaciones.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {DragDropModule} from '@angular/cdk/drag-drop'
 
 
 
@@ -48,7 +52,8 @@ import { RegistrationComponent } from './users/registration/registration.compone
     LoginComponent,
     EncuentroPeopleComponent,
     DialogPeopleDeleteConfirmation,
-    RegistrationComponent
+    RegistrationComponent,
+    AsignacionesComponent
     
   ],
   imports: [
@@ -74,7 +79,10 @@ import { RegistrationComponent } from './users/registration/registration.compone
     MatDividerModule,
     MatRadioModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule,
+    MatGridListModule,
+    DragDropModule
     
     
     ],

@@ -18,6 +18,10 @@ export class PeopleService {
     return this.db.collection(this.basePath, ref => ref.orderBy('grupo')).snapshotChanges();
   }
 
+  getAll$():Observable<any> {
+    return this.db.collection(this.basePath, ref => ref.orderBy('name')).valueChanges();
+  }
+
   getPeopleByEvent$(event:string):Observable<any>{
     return this.db.collection("people", ref => ref.where('event_type','==',event))
     .valueChanges({idField:'peopleId'});
