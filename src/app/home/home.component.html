@@ -9,51 +9,24 @@
             </div>
             <div class="sidebar">
                 <ul>
-                    <li *ngFor="let item of menuItems">
-                        <a [routerLink]="item.route">
-                            <span class="icon"><i class="{{item.icon}}"></i></span>{{item.name}}
-                        </a>
-                    </li>
-                    <!-- <li>
-                        <a routerLink="">
-                            <span class="icon"><i class="fa-solid fa-house"></i></span>
-                            Main
-                        </a>
-                    </li>
-                    <li>
-                        <a routerLink="users">
-                            <span class="icon"><i class="fa-solid fa-users"></i></span>
-                            Users</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" (click)="openCollapse($event)">
-                            <span class="icon">
-                                <i class="fa-solid fa-hands-praying"></i>
-                            </span>
-                            Encuentros
-                        </a>
-                        <div [ngClass]="{'content-open':!collapse, 'content-close':collapse}">
-                            <li><a [routerLink]="['encuentros']" [queryParams]="{type: 'varones'}">Varones</a></li>
-                            <li><a [routerLink]="['encuentros']" [queryParams]="{type: 'mujeres'}">Mujeres</a></li>    
+                    <li *ngFor="let item of menuItems; let i=index">
+                        <div *ngIf="!item.submenu;else showOption">
+                            <a [routerLink]="item.route">
+                                <span class="icon"><i class="{{item.icon}}"></i></span>{{item.name}}
+                            </a>
                         </div>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" (click)="openCollapse($event)"><span class="icon"><i class="fa-solid fa-dove"></i></span>
-                            New Life
-                        </a>
-                        <ul [ngClass]="{'content-open':!collapse, 'content-close':collapse}">
-                            <li><a [routerLink]="['newlife/asignaciones']">Asignaciones</a></li>
-                            <li><a [routerLink]="['newlife/discipuladores']">Consolidadores</a></li>
+                        <ng-template #showOption>
+                            <a href="javascript:void(0);" (click)="openCollapse(i)">
+                                <span class="icon"> <i class="{{item.icon}}"></i></span>{{item.name}}
+                            </a>
+                        </ng-template>
+                        <ul *ngIf="item.show">
+                            <li *ngFor=" let submenu of item.submenus">
+                                <a [routerLink]="submenu.route" [queryParams]="submenu.queryParams">{{submenu.name}}</a>
+                            </li>
                         </ul>
+ 
                     </li>
-                    <li>
-                        <a  href="javascript:void(0);" (click)="logOut()">
-                            <span class="icon">
-                                <i class="fa-solid fa-right-from-bracket"></i>
-                            </span>
-                            LogOut
-                        </a>
-                    </li> -->
                 </ul>
             </div>
         </div>

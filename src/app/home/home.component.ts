@@ -11,38 +11,79 @@ export class HomeComponent implements OnInit {
   collapse:boolean = true;
   constructor(private authService: AuthService, private route: Router) { }
 
-  ngOnInit(): void {
-  }
-
   menuItems = [
     {
       name: 'Home',
       route: '',
-      icon: 'fa-solid fa-house'
+      icon: 'fa-solid fa-house',
+      submenu: false,
+      show:false
     },
     {
       name: 'Users',
       route:'users',
-      icon:'fa-solid fa-users'
+      icon:'fa-solid fa-users',
+      submenu: false,
+      show:false
     },
     {
       name: 'Encuentros',
-      icon: 'fa-solid fa-hands-praying'
+      icon: 'fa-solid fa-hands-praying',
+      submenu: true,
+      show:false,
+      submenus :[
+        {
+          name:'Varones',
+          route: 'encuentros',
+          queryParams: {
+            'type':'varones'
+          }
+        },
+        {
+          name:'Mujeres',
+          route: 'encuentros',
+          queryParams: 
+          {
+            'type':'mujeres'
+          }
+        },
+      ]
     },
     {
       name: 'NewLife',
-      icon: 'fa-solid fa-dove'
+      icon: 'fa-solid fa-dove',
+      submenu: true,
+      show:false,
+      submenus:[
+        {
+          name: 'Asignaciones',
+          route:'newlife/asignaciones',
+          queryParams: {}
+        },
+        {
+          name:'Consolidadores',
+          route:'newlife/discipuladores',
+          queryParams: {}
+        }
+      ]
     },
     {
       name: 'Logout',
-      icon: 'fa-solid fa-right-from-bracket'
+      icon: 'fa-solid fa-right-from-bracket',
+      show:false,
+      submenu: true
     }
 
   ]
+  
+  ngOnInit(): void {
 
-  openCollapse(event:any){
-    this.collapse = !this.collapse;
-    console.log(this.collapse);
+  }
+
+  openCollapse(index:number){
+    console.log(index)
+    this.menuItems[index].show = !this.menuItems[index].show
+    console.log(this.menuItems);
   }
 
   logOut(){
