@@ -36,6 +36,7 @@ export class DiscipulosComponent implements OnInit {
       console.log(data);
       this.dataSource = data.map((e:any) =>{
         return {
+          id: e.peopleId,
           firstName: e.name,
           lastName: e.last_name,
           email: e.email,

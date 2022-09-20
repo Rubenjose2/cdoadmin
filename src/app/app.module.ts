@@ -34,7 +34,12 @@ import { RegistrationComponent } from './users/registration/registration.compone
 import {MatCardModule} from '@angular/material/card';
 import { AsignacionesComponent } from './newLife/asignaciones/asignaciones.component';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {DragDropModule} from '@angular/cdk/drag-drop'
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { PeopleComponent } from './people/individual/people.component'
+import {MatTabsModule} from '@angular/material/tabs';
+import { ServiciosComponent } from './people/partials/servicios/servicios.component';
+import { SetupComponent } from './people/partials/setup/setup.component';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 
@@ -53,7 +58,10 @@ import {DragDropModule} from '@angular/cdk/drag-drop'
     EncuentroPeopleComponent,
     DialogPeopleDeleteConfirmation,
     RegistrationComponent,
-    AsignacionesComponent
+    AsignacionesComponent,
+    PeopleComponent,
+    ServiciosComponent,
+    SetupComponent
     
   ],
   imports: [
@@ -82,7 +90,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop'
     MatIconModule,
     MatCardModule,
     MatGridListModule,
-    DragDropModule
+    DragDropModule,
+    MatTabsModule,
+    MatChipsModule
     
     
     ],

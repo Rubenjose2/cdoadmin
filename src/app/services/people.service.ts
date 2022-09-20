@@ -29,7 +29,7 @@ export class PeopleService {
 
   getPeopleByDiscipulos$():Observable<any>{
     return this.db.collection("people", ref => ref.where('source','==','discipuladores'))
-    .valueChanges();
+    .valueChanges({idField:'peopleId'});
   }
 
   getPeopleById(id:string):Observable<any>{

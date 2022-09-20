@@ -12,6 +12,7 @@ import { canActivate } from '@angular/fire/compat/auth-guard';
 import { pipe } from 'rxjs';
 import { RolesGuard } from './guard/roles.guard';
 import { AsignacionesComponent } from './newLife/asignaciones/asignaciones.component';
+import { PeopleComponent } from './people/individual/people.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,11 @@ const routes: Routes = [
             component:AsignacionesComponent
           }
         ]
+      },
+      // People
+      {
+        path:'people',
+        component:PeopleComponent
       }
     ],canActivate: [AuthGuard]
   },
