@@ -24,9 +24,30 @@
         <mat-form-field class='container-long-field' appearance="outline">
             <mat-label>Areas de Servicio</mat-label>
             <mat-chip-list #chipList aria-label="Areas de Servicio">
+                <mat-chip
+                *ngFor="let area of peopleAreas"
+                (removed)="remove(area)"
+                >
+                {{area.name}}
+                <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip>
                 
+            <input 
+            placeholder="Anadir Area..."
+            #workingAreadInput
+            formControlName ="workingAreas"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
             </mat-chip-list>
-            <input matInput type="tel" formControlName="services">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let area of allWorkingAreas" [value]="area">
+                    {{area.name}}
+                </mat-option>
+            </mat-autocomplete>
         </mat-form-field>
     </div>
 

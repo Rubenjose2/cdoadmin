@@ -40,6 +40,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { ServiciosComponent } from './people/partials/servicios/servicios.component';
 import { SetupComponent } from './people/partials/setup/setup.component';
 import {MatChipsModule} from '@angular/material/chips';
+import { LogoutComponent } from './logout/logout.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 
@@ -61,7 +63,8 @@ import {MatChipsModule} from '@angular/material/chips';
     AsignacionesComponent,
     PeopleComponent,
     ServiciosComponent,
-    SetupComponent
+    SetupComponent,
+    LogoutComponent
     
   ],
   imports: [
@@ -92,7 +95,8 @@ import {MatChipsModule} from '@angular/material/chips';
     MatGridListModule,
     DragDropModule,
     MatTabsModule,
-    MatChipsModule
+    MatChipsModule,
+    MatAutocompleteModule
     
     
     ],

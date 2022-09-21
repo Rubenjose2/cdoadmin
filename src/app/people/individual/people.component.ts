@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PeopleService } from 'src/app/services/people.service';
+import { ServiceAreasService } from 'src/app/services/service-areas.service';
+import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {MatChipInputEvent} from '@angular/material/chips';
+import { map, Observable, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-people',
@@ -12,14 +17,22 @@ export class PeopleComponent implements OnInit {
 
   private peopleidParam:string = '';
   peopleForm!:FormGroup;
+  allWorkingAreas:any = [];
+  peopleAreas:any = []; //<-Coming from the API
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  
 
   constructor(
     private peopleService: PeopleService,
-    private route : ActivatedRoute
-    ) { }
+    private route : ActivatedRoute,
+    private workinService: ServiceAreasService
+    ) {
+
+    }
 
   ngOnInit(): void {
     this.createForm();
+    this.getWorkingAreas()
     this.route.queryParams.subscribe((param:any) => {
       this.peopleidParam = param['sys_id'];
       this.peopleService.getPeopleById(this.peopleidParam).subscribe(res =>{
@@ -53,8 +66,14 @@ export class PeopleComponent implements OnInit {
             submittion: res.submitted || ''
           }
         })
+        this.peopleAreas =res.servicios;
       });   
-
+    })
+    this.peopleForm.get('workingAreas')?.valueChanges.subscribe((value:any | null) =>{
+      if(value.name){
+        this.allWorkingAreas = this._filter(this.allWorkingAreas,value.name);
+      }
+      
     })
   }
   createForm(){
@@ -80,12 +99,41 @@ export class PeopleComponent implements OnInit {
       descuento: new FormControl(),
       sponsor: new FormControl(),
       checkIn: new FormControl(),
+      workingAreas: new FormControl(''),
       setup: new FormGroup({
         source: new FormControl({value: '', disabled: true}),
         submittion: new FormControl({value: '', disabled: true})
       })
 
     })
+  }
+
+  getWorkingAreas(){
+    this.workinService.getWorkinAreasList().subscribe(data => {
+      this.allWorkingAreas = data;
+
+    })
+  }
+
+  add(event:MatChipInputEvent):void{
+    console.log(event.value);
+
+  }
+
+  remove(area:any){
+    console.log(area);
+  }
+
+  selected(event: MatAutocompleteSelectedEvent):void{
+    console.log(event.option.value);
+    this.peopleAreas.push(event.option.value);
+
+  }
+
+  private _filter(array:any,value:any):void{
+    const filterValue = value.toLowerCase();
+    const index = this.allWorkingAreas.indexOf()
+    return array.filter((area:any) => area.name.toLowerCase() != filterValue);
   }
 
 

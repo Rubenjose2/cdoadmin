@@ -13,6 +13,7 @@ import { pipe } from 'rxjs';
 import { RolesGuard } from './guard/roles.guard';
 import { AsignacionesComponent } from './newLife/asignaciones/asignaciones.component';
 import { PeopleComponent } from './people/individual/people.component';
+import { LogoutComponent } from './logout/logout.component';
 
 const routes: Routes = [
   {
@@ -49,7 +50,12 @@ const routes: Routes = [
       {
         path:'people',
         component:PeopleComponent
-      }
+      },
+      {
+        path:'logout',
+        component: LogoutComponent
+      },
+      
     ],canActivate: [AuthGuard]
   },
   {

@@ -48,6 +48,7 @@ export class AuthService {
       .then(userCredential => {
         if(userCredential){
           this.setCurrenUserInfo(); // <- Saving into the Local Storage
+          this.autlogOut(60*60000);
           this.route.navigate(['']);
         }
         
@@ -89,6 +90,12 @@ export class AuthService {
 
     isLoggedIn():boolean{
       return this.afAuth.authState !=null;
+    }
+
+    autlogOut(expirationTime:number){
+      setTimeout(() => {
+        this.logout().then(() => this.route.navigate(['login']));
+      },expirationTime)
     }
 
     // This function is in chage to save the user Information on the local Storage
