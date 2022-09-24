@@ -53,6 +53,14 @@
       <th mat-header-cell *matHeaderCellDef> Group</th>
       <td mat-cell *matCellDef="let element"> {{element.group}} </td>
     </ng-container>
+    <ng-container matColumnDef="Payment">
+      <th mat-header-cell *matHeaderCellDef>Payment</th>
+      <td mat-cell *matCellDef="let element" >
+        <span [ngClass]="{'pago-green': element.payment}">
+          <i class="fa-solid fa-sack-dollar"></i>  
+        </span>
+      </td>
+    </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'checkIn': row.checkIn == 'Yes' }"></tr>

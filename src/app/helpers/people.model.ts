@@ -16,5 +16,6 @@ export interface PeopleModel {
     grupo?:string,
     descuento?:string,
     sponsor?:string,
-    checkIn?: string
+    checkIn?: string,
+    pagoDone?:boolean
 }

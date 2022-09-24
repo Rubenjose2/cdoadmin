@@ -42,6 +42,8 @@ import { SetupComponent } from './people/partials/setup/setup.component';
 import {MatChipsModule} from '@angular/material/chips';
 import { LogoutComponent } from './logout/logout.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { NewPeopleComponent } from './people/new-people/new-people.component';
 
 
 
@@ -64,7 +66,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     PeopleComponent,
     ServiciosComponent,
     SetupComponent,
-    LogoutComponent
+    LogoutComponent,
+    NewPeopleComponent
     
   ],
   imports: [
@@ -96,7 +99,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     DragDropModule,
     MatTabsModule,
     MatChipsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatCheckboxModule
     
     
     ],

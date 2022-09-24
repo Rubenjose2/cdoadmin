@@ -56,6 +56,10 @@ export class HomeComponent implements OnInit {
       show:false,
       submenus:[
         {
+          name:'Convertidos/Invidatos',
+          route:'newlife/newpeople'
+        },
+        {
           name: 'Asignaciones',
           route:'newlife/asignaciones',
           queryParams: {}

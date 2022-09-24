@@ -14,6 +14,7 @@ import { RolesGuard } from './guard/roles.guard';
 import { AsignacionesComponent } from './newLife/asignaciones/asignaciones.component';
 import { PeopleComponent } from './people/individual/people.component';
 import { LogoutComponent } from './logout/logout.component';
+import { NewPeopleComponent } from './people/new-people/new-people.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
       {
         path:'newlife',
         children: [
+          {
+            path:'newpeople',
+            component:NewPeopleComponent
+          },
           {
             path:'discipuladores',
             component:DiscipulosComponent

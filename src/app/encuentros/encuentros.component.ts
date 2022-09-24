@@ -37,7 +37,8 @@ export class EncuentrosComponent implements OnInit{
     'EmergencyContact',
     'Translation',
     'Age',
-    'Group'
+    'Group',
+    'Payment'
   ]
 
  ngOnInit(): void { 
@@ -75,7 +76,8 @@ export class EncuentrosComponent implements OnInit{
           emergencyPhone: e.emergency_phone,
           age:e.age,
           group: e.grupo,
-          checkIn: e.checkIn
+          checkIn: e.checkIn,
+          payment:e.pagoDone
         }
       })
     })

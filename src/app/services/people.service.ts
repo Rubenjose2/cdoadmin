@@ -23,8 +23,17 @@ export class PeopleService {
   }
 
   getPeopleByEvent$(event:string):Observable<any>{
-    return this.db.collection("people", ref => ref.where('event_type','==',event))
+    return this.db.collection("people", ref => ref
+    .orderBy('name')
+    .where('event_type','==',event))
     .valueChanges({idField:'peopleId'});
+  }
+
+  getNewPeople$():Observable<any>{
+    return this.db.collection('people', ref => ref
+      .orderBy('name')
+      .where('source', '==','bienvenido')
+      ).valueChanges({idField:'peopleId'});
   }
 
   getPeopleByDiscipulos$():Observable<any>{

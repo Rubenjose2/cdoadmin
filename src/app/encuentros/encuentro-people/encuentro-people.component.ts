@@ -61,7 +61,8 @@ export class EncuentroPeopleComponent implements OnInit {
           pago: res.pago || '',
           descuento: res.descuento || '',
           sponsor: res.sponsor || '',
-          checkIn: res.checkIn || ''
+          checkIn: res.checkIn || '',
+          pagoDone: res.pagoDone || ''
         })
       });      
     })
@@ -90,7 +91,8 @@ export class EncuentroPeopleComponent implements OnInit {
       pago: new FormControl(),
       descuento: new FormControl(),
       sponsor: new FormControl(),
-      checkIn: new FormControl()
+      checkIn: new FormControl(),
+      pagoDone: new FormControl()
     })
   }
 
