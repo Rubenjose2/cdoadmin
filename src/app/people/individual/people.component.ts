@@ -32,7 +32,6 @@ export class PeopleComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-    this.getWorkingAreas()
     this.route.queryParams.subscribe((param:any) => {
       this.peopleidParam = param['sys_id'];
       this.peopleService.getPeopleById(this.peopleidParam).subscribe(res =>{
@@ -66,9 +65,10 @@ export class PeopleComponent implements OnInit {
             submittion: res.submitted || ''
           }
         })
-        this.peopleAreas =res.servicios;
+        this.peopleAreas =  res.servicios || [];
       });   
-    })
+    });
+    this.getWorkingAreas();
     this.peopleForm.get('workingAreas')?.valueChanges.subscribe((value:any | null) =>{
       if(value.name){
         this.allWorkingAreas = this._filter(this.allWorkingAreas,value.name);
@@ -110,30 +110,35 @@ export class PeopleComponent implements OnInit {
 
   getWorkingAreas(){
     this.workinService.getWorkinAreasList().subscribe(data => {
-      this.allWorkingAreas = data;
-
+      this.allWorkingAreas = (this.peopleAreas.length > 0) ?this._filter(data,this.peopleAreas):data;
     })
   }
 
   add(event:MatChipInputEvent):void{
     console.log(event.value);
-
   }
 
   remove(area:any){
-    console.log(area);
+    this.peopleService.removePeopleServiceArea(this.peopleidParam,area);
   }
 
   selected(event: MatAutocompleteSelectedEvent):void{
-    console.log(event.option.value);
     this.peopleAreas.push(event.option.value);
-
+    this.peopleService.setPeopleServiceArea(this.peopleidParam,event.option.value)
   }
 
-  private _filter(array:any,value:any):void{
-    const filterValue = value.toLowerCase();
-    const index = this.allWorkingAreas.indexOf()
-    return array.filter((area:any) => area.name.toLowerCase() != filterValue);
+  private _filter(array:any,value:any){
+    if(Array.isArray(value)){
+      let result: any[] = [];
+      value.forEach( val => {
+        array = (this._filter(array,val.name));
+      })
+      return array;
+    }else{
+      const filterValue = value.toLowerCase();
+      const index = this.allWorkingAreas.indexOf()
+      return array.filter((area:any) => area.name.toLowerCase() != filterValue);
+    }
   }
 
 

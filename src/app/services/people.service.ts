@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { BehaviorSubject, Observable, Subject, switchMap } from 'rxjs';
 import { PeopleModel } from '../helpers/people.model';
+import { peopleArea } from '../helpers/areaServiceModel';
+import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +15,8 @@ export class PeopleService {
   private _people = new BehaviorSubject<any>(null);
 
   constructor(
-    private db: AngularFirestore){}
+    private db: AngularFirestore,
+    ){}
 
   getPeople(){
     return this.db.collection(this.basePath, ref => ref.orderBy('grupo')).snapshotChanges();
@@ -45,6 +49,16 @@ export class PeopleService {
     return this.db.collection('people').doc(id).valueChanges();
   }
 
+  setPeopleServiceArea(id:string, newArea: peopleArea):void{
+    this.db.collection('people').doc(id).update({
+      servicios: arrayUnion(newArea)
+    })
+  }
+  removePeopleServiceArea(id:string,removeArea:peopleArea):void{
+    this.db.collection('people').doc(id).update({
+      servicios: arrayRemove(removeArea)
+    })
+  }
   updatePeople(id:string, peopleObj:PeopleModel){
     this.db.collection('people').doc(id).update(peopleObj);
     //search for subcollection update or create
@@ -65,3 +79,5 @@ export class PeopleService {
   }
 
 }
+
+

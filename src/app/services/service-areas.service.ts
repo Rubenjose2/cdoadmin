@@ -13,7 +13,7 @@ export class ServiceAreasService {
   ) { }
 
   getWorkinAreasList():Observable<any>{
-    return this.db.collection(this.basePath).valueChanges({ idField: 'service_id' });
+    return this.db.collection(this.basePath).valueChanges({ idField: 'id' });
   }
   getUniqueService(id:string){
     this.db.collection(this.basePath).doc(id).valueChanges();
