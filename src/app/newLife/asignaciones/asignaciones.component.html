@@ -6,16 +6,23 @@
             A  B  C  D  E
         </div>
     </div>
-    <div class="main-container-transaction">
+    <div class="main-container-transaction" >
         <div class="main-container-consolidation">
-            <mat-card>Simple card</mat-card>
+            <div class="card-consolidador" *ngFor="let cons of consolidador;let i= index" >
+                <mat-card dndDropzone
+                (dndDrop)="onDrop($any($event), i)"
+                >
+                    {{cons.name}} {{cons.last_name}} {{i}}
+                </mat-card>
+            </div>
+            
         </div>
         <div class="main-container-people">
-            <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-                <div class="example-box"  *ngFor="let people of peopleModel"cdkDrag>
-                  <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-                    {{people.firstName}}  {{people.lastName}}
-                </div>
+            <div class="example-list">
+                <div *ngFor="let people of peopleModel">
+                    <mat-card [dndDraggable]="people.firstName">
+                        <!-- {{people.firstName}}  {{people.lastName}} -->
+                    </mat-card>
               </div>
         </div>
     </div>

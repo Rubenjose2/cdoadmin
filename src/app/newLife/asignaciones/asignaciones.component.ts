@@ -1,5 +1,7 @@
+import { CdkDragDrop, CdkDragEnter } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { PeopleService } from 'src/app/services/people.service';
+import { DndDropEvent } from 'ngx-drag-drop';
 
 @Component({
   selector: 'app-asignaciones',
@@ -8,6 +10,15 @@ import { PeopleService } from 'src/app/services/people.service';
 })
 export class AsignacionesComponent implements OnInit {
   peopleModel:any = []
+  consolidador:any = []
+  private CONSOLIDADORES = {
+    id:'VDTJSECLTLFD6tRPvrps',
+    name:'Consolidador'
+  }
+
+  draggable = {
+    data: "myData"
+  }
 
   constructor(
     private peopleService: PeopleService
@@ -15,6 +26,7 @@ export class AsignacionesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPeopleList();
+    this.getConsolidadoresList();
   }
 
   getPeopleList(){
@@ -30,9 +42,14 @@ export class AsignacionesComponent implements OnInit {
       })
     })
   }
+  async getConsolidadoresList() {
+    const snapshot = await this.peopleService.getAllPeopleByArea(this.CONSOLIDADORES);
+    this.consolidador = (snapshot.docs.map(doc =>doc.data()));
+  }
 
-  drop(event:any){
-
+  onDrop(event:DndDropEvent, i:any){
+    console.log(event);
+    console.log(i)
   }
 
 }

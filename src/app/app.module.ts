@@ -44,6 +44,10 @@ import { LogoutComponent } from './logout/logout.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { NewPeopleComponent } from './people/new-people/new-people.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import { DndModule } from 'ngx-drag-drop';
+
 
 
 
@@ -100,7 +104,10 @@ import { NewPeopleComponent } from './people/new-people/new-people.component';
     MatTabsModule,
     MatChipsModule,
     MatAutocompleteModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatPaginatorModule,
+    MatSortModule,
+    DndModule
     
     
     ],

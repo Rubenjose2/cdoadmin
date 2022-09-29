@@ -7,6 +7,7 @@ import { ServiceAreasService } from 'src/app/services/service-areas.service';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
 import { map, Observable, startWith } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-people',
@@ -25,7 +26,8 @@ export class PeopleComponent implements OnInit {
   constructor(
     private peopleService: PeopleService,
     private route : ActivatedRoute,
-    private workinService: ServiceAreasService
+    private workinService: ServiceAreasService,
+    private _snackbar : MatSnackBar
     ) {
 
     }
@@ -125,6 +127,12 @@ export class PeopleComponent implements OnInit {
   selected(event: MatAutocompleteSelectedEvent):void{
     this.peopleAreas.push(event.option.value);
     this.peopleService.setPeopleServiceArea(this.peopleidParam,event.option.value)
+    this.openSnackBar('Usuario actualizado', 'Cerrar');
+  }
+
+
+  openSnackBar(message:string, action:string){
+    this._snackbar.open(message,action, {duration: 3000});
   }
 
   private _filter(array:any,value:any){

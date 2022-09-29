@@ -1,65 +1,68 @@
 <div class="container">
 <h2>People</h2>
 <div class="container-title">Information Personal</div>
-<form [formGroup]="peopleForm">
-    <div formGroupName="basicInfo">
-        <mat-form-field  appearance="outline">
-            <mat-label>Name</mat-label>
-            <input matInput formControlName="name">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Apellido</mat-label>
-            <input matInput formControlName="last_name">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input matInput type="email" formControlName="email">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Telefono</mat-label>
-            <input matInput type="tel" formControlName="phone">
-        </mat-form-field>
-    </div>
-    <div>
-        <mat-form-field class='container-long-field' appearance="outline">
-            <mat-label>Areas de Servicio</mat-label>
-            <mat-chip-list #chipList aria-label="Areas de Servicio">
-                <mat-chip
-                *ngFor="let area of peopleAreas"
-                (removed)="remove(area)"
-                >
-                {{area.name}}
-                <button matChipRemove>
-                    <mat-icon>cancel</mat-icon>
-                </button>
-            </mat-chip>
-                
-            <input 
-            placeholder="Anadir Area..."
-            #workingAreadInput
-            formControlName ="workingAreas"
-            [matAutocomplete]="auto"
-            [matChipInputFor]="chipList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            (matChipInputTokenEnd)="add($event)">
-            </mat-chip-list>
-            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                <mat-option *ngFor="let area of allWorkingAreas" [value]="area">
+<div>
+    <form [formGroup]="peopleForm">
+        <div formGroupName="basicInfo">
+            <mat-form-field  appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Apellido</mat-label>
+                <input matInput formControlName="last_name">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" formControlName="email">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Telefono</mat-label>
+                <input matInput type="tel" formControlName="phone">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class='container-long-field' appearance="outline">
+                <mat-label>Areas de Servicio</mat-label>
+                <mat-chip-list #chipList aria-label="Areas de Servicio">
+                    <mat-chip
+                    *ngFor="let area of peopleAreas"
+                    (removed)="remove(area)"
+                    >
                     {{area.name}}
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
-    </div>
+                    <button matChipRemove>
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip>
+                    
+                <input 
+                placeholder="Anadir Area..."
+                #workingAreadInput
+                formControlName ="workingAreas"
+                [matAutocomplete]="auto"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let area of allWorkingAreas" [value]="area">
+                        {{area.name}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+    
+        <!-- Taps -->
+        <mat-tab-group mat-align-tabs="center">
+            <mat-tab label="Familia">Familia</mat-tab>
+            <mat-tab label="Areas de Servicio"><app-servicios></app-servicios></mat-tab>
+            <mat-tab label="Encuentros">Encuentros</mat-tab>
+            <mat-tab label="New Life">New Life</mat-tab>
+            <mat-tab label="Grupo de Conexion"></mat-tab>
+            <mat-tab label="Setup"><app-setup formGroupName="setup"></app-setup></mat-tab>
+        </mat-tab-group>
+    
+    </form>
+</div>
 
-    <!-- Taps -->
-    <mat-tab-group mat-align-tabs="center">
-        <mat-tab label="Familia">Familia</mat-tab>
-        <mat-tab label="Areas de Servicio"><app-servicios></app-servicios></mat-tab>
-        <mat-tab label="Encuentros">Encuentros</mat-tab>
-        <mat-tab label="New Life">New Life</mat-tab>
-        <mat-tab label="Grupo de Conexion"></mat-tab>
-        <mat-tab label="Setup"><app-setup formGroupName="setup"></app-setup></mat-tab>
-    </mat-tab-group>
-
-</form>
 </div>
