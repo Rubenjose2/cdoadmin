@@ -1,0 +1,12 @@
+<div class="main-container">
+    <form [formGroup]="formSetup">
+        <mat-form-field appearance="outline">
+            <mat-label>Estatus</mat-label>
+            <mat-select formControlName="state" (selectionChange)="updateOption($event)">
+                <mat-option *ngFor="let option of options" [value]="option">
+                    {{option}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+</div>

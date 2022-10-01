@@ -16,7 +16,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class PeopleComponent implements OnInit {
 
-  private peopleidParam:string = '';
+  peopleidParam:string = '';
   peopleForm!:FormGroup;
   allWorkingAreas:any = [];
   peopleAreas:any = []; //<-Coming from the API
@@ -65,6 +65,9 @@ export class PeopleComponent implements OnInit {
           setup:{
             source: res.source || '',
             submittion: res.submitted || ''
+          },
+          newLife:{
+            state: res.NewLife?.state || ''
           }
         })
         this.peopleAreas =  res.servicios || [];
@@ -105,6 +108,9 @@ export class PeopleComponent implements OnInit {
       setup: new FormGroup({
         source: new FormControl({value: '', disabled: true}),
         submittion: new FormControl({value: '', disabled: true})
+      }),
+      newLife: new FormGroup({
+        state: new FormControl('')
       })
 
     })
@@ -129,7 +135,6 @@ export class PeopleComponent implements OnInit {
     this.peopleService.setPeopleServiceArea(this.peopleidParam,event.option.value)
     this.openSnackBar('Usuario actualizado', 'Cerrar');
   }
-
 
   openSnackBar(message:string, action:string){
     this._snackbar.open(message,action, {duration: 3000});

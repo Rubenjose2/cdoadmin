@@ -47,6 +47,7 @@ import { NewPeopleComponent } from './people/new-people/new-people.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { DndModule } from 'ngx-drag-drop';
+import { NewLifeComponent } from './people/partials/new-life/new-life.component';
 
 
 
@@ -71,7 +72,8 @@ import { DndModule } from 'ngx-drag-drop';
     ServiciosComponent,
     SetupComponent,
     LogoutComponent,
-    NewPeopleComponent
+    NewPeopleComponent,
+    NewLifeComponent
     
   ],
   imports: [

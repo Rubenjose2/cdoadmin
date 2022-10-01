@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subject, switchMap } from 'rxjs';
 import { PeopleModel } from '../helpers/people.model';
 import { peopleArea } from '../helpers/areaServiceModel';
 import { doc, updateDoc, arrayUnion, arrayRemove, collection } from "firebase/firestore";
+import { NewLife } from '../helpers/newLife.model';
 
 
 @Injectable({
@@ -78,6 +79,10 @@ export class PeopleService {
       descuento: peopleObj.descuento,
       sponsor: peopleObj.sponsor
     })
+  }
+
+  updateNewLife(id:string, newLifeObj:NewLife){
+    this.db.collection('people').doc(id).update({NewLife:newLifeObj});
   }
 
   deletePeople(id:string){
