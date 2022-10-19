@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { BehaviorSubject, Observable, Subject, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatest, concatMap, defer, delay, every, expand, map, merge, mergeMap, Observable, of, pipe, Subject, switchMap, take, tap } from 'rxjs';
 import { PeopleModel } from '../helpers/people.model';
 import { peopleArea } from '../helpers/areaServiceModel';
-import { doc, updateDoc, arrayUnion, arrayRemove, collection } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, arrayRemove, collection, DocumentSnapshot, QueryDocumentSnapshot, QuerySnapshot } from "firebase/firestore";
 import { NewLife } from '../helpers/newLife.model';
+import { docJoin } from '../helpers/docJoin';
+import { X } from '@angular/cdk/keycodes';
 
 
 @Injectable({
@@ -14,7 +16,7 @@ import { NewLife } from '../helpers/newLife.model';
 export class PeopleService {
 
   private basePath = '/people';
-  private _people = new BehaviorSubject<any>(null);
+  _people = new BehaviorSubject<any>(null);
 
   constructor(
     private db: AngularFirestore,
@@ -39,7 +41,21 @@ export class PeopleService {
     return this.db.collection('people', ref => ref
       .orderBy('name')
       .where('source', '==','bienvenido')
-      ).valueChanges({idField:'peopleId'});
+      ).valueChanges({idField:'sysId'});
+  }
+
+  getNewPeopleByCoach$(coachId:string):Observable<any>{
+    let data: any;
+    return this.db.collection('people').doc(coachId).valueChanges({idField:'sysId'}).pipe(
+      switchMap((r:any) => {
+        data = r;
+        console.log(data);
+        const docs = r['NewLife'].map(
+          (item:any) => this.db.collection('people').doc(item).valueChanges({idField:'sysId'})
+        )
+        return combineLatest(docs);
+      })
+    )
   }
 
   getPeopleByDiscipulos$():Observable<any>{
@@ -52,8 +68,11 @@ export class PeopleService {
   }
 
   getAllPeopleByArea(area:serviceArea){
-    console.log(area);
     return this.db.firestore.collection('people').where('servicios','array-contains',area).get()
+  }
+
+  getAllPeopleByNewLife(newLife:any){
+    return this.db.collection('people', ref=> ref.where('NewLife','==',newLife)).valueChanges({idField:'sysId'})
   }
 
   setPeopleServiceArea(id:string, newArea: peopleArea):void{
@@ -85,9 +104,15 @@ export class PeopleService {
     this.db.collection('people').doc(id).update({NewLife:newLifeObj});
   }
 
+  //Adding the People to Consolidadores
+  updateConsolidador(id:string, peopleId:string) {
+    this.db.collection('people').doc(id).update({NewLife: arrayUnion(peopleId)});
+  }
+
   deletePeople(id:string){
     this.db.collection('people').doc(id).delete();
   }
+
 
 }
 

@@ -62,7 +62,6 @@ ngAfterViewInit():void{
   }
 
   clickedRow(row:any){
-    console.log(row.id);
     this.router.navigate(['../../people'],{ queryParams: {sys_id : row.id}});
   }
 

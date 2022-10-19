@@ -1,3 +1,4 @@
 export interface NewLife {
-    state?: string
+    state?: string,
+    coach?:string
 }

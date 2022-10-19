@@ -48,6 +48,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { DndModule } from 'ngx-drag-drop';
 import { NewLifeComponent } from './people/partials/new-life/new-life.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import { NavigatorComponent } from './partials/navigator/navigator.component';
+import { Normalizer } from './helpers/people.model';
 
 
 
@@ -73,7 +76,8 @@ import { NewLifeComponent } from './people/partials/new-life/new-life.component'
     SetupComponent,
     LogoutComponent,
     NewPeopleComponent,
-    NewLifeComponent
+    NewLifeComponent,
+    NavigatorComponent
     
   ],
   imports: [
@@ -109,11 +113,13 @@ import { NewLifeComponent } from './people/partials/new-life/new-life.component'
     MatCheckboxModule,
     MatPaginatorModule,
     MatSortModule,
-    DndModule
+    DndModule,
+    MatBadgeModule,
+
     
     
     ],
-  providers: [],
+  providers: [Normalizer],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

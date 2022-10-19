@@ -19,3 +19,38 @@ export interface PeopleModel {
     checkIn?: string,
     pagoDone?:boolean
 }
+
+export interface PeopleRaw {
+    sysId?: string,
+    name?: string,
+    last_name?:string,
+    email?:string,
+    phone?:string,
+    age?:string,
+    submitted?:any,
+    NewLife?:[]
+}
+
+export interface PeopleNormalized {
+    id?:string,
+    firstName?: string,
+    lastName?: string,
+    email?: string,
+    phone?: string,
+    age?:string,
+    created?: string
+}
+
+export class Normalizer {
+    toPeople(peopleObjects:PeopleRaw[]):PeopleNormalized[]{
+        return peopleObjects.map((peopleObject) => ({
+            id: peopleObject.sysId,
+            firstName: peopleObject.name,
+            lastName: peopleObject.last_name,
+            email: peopleObject.email,
+            phone: peopleObject.phone,
+            age: peopleObject.age,
+            created : new Date(peopleObject.submitted).toLocaleDateString("en-US")
+        }))
+    }
+}

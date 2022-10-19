@@ -9,6 +9,11 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import { map, Observable, startWith } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+export interface TabItems {
+  label: string,
+  route: string
+}
+
 @Component({
   selector: 'app-people',
   templateUrl: './people.component.html',
@@ -21,7 +26,16 @@ export class PeopleComponent implements OnInit {
   allWorkingAreas:any = [];
   peopleAreas:any = []; //<-Coming from the API
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  
+  tabs: TabItems[] = [
+    {
+      label:'Familia',
+      route:'/home'
+    },
+    {
+      label:'New Life',
+      route:'newLife'
+    }
+  ]
 
   constructor(
     private peopleService: PeopleService,
@@ -153,6 +167,4 @@ export class PeopleComponent implements OnInit {
       return array.filter((area:any) => area.name.toLowerCase() != filterValue);
     }
   }
-
-
 }

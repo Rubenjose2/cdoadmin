@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Normalizer} from 'src/app/helpers/people.model';
 import { PeopleService } from 'src/app/services/people.service';
 
 @Component({
@@ -8,6 +10,10 @@ import { PeopleService } from 'src/app/services/people.service';
 })
 export class NewPeopleComponent implements OnInit {
 
+  @Input () sysId: string = '';
+  title = ''
+  filtered!:boolean
+
   dataSource:any = [];
 
   displayedColumns: string[] = [
@@ -15,28 +21,40 @@ export class NewPeopleComponent implements OnInit {
     'FullName',
     'PhoneNumber',
     'Email',
-    'Created'
+    'ageRange',
+    'Created',
+    'Action'
   ]
 
-  constructor(private peopleService: PeopleService) { }
+  constructor(
+    private peopleService: PeopleService, 
+    private normalizer: Normalizer,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
-    this.getDiscipulosList();
+    this.filtered = (this.sysId !='') ? true:false
+    this.title = this.filtered ? 'Mis Seguimientos': 'Convertidos o Invitados';
+    this.filtered ? this.getDiscipulosFiltered(this.sysId) : this.getDiscipulosList();
+  }
+
+  clickedRow(row:any) {
+    console.log(row)
+    this.router.navigate(['../../people'],{ queryParams: {sys_id : row.id}});
+  }
+
+  drop(element:any){
+    console.log(element);
   }
 
   getDiscipulosList(){
     this.peopleService.getNewPeople$().subscribe(data =>{
-      console.log(data);
-      this.dataSource = data.map((e:any) =>{
-        return {
-          id: e.peopleId,
-          firstName: e.name,
-          lastName: e.last_name,
-          email: e.email,
-          phone: e.phone,
-          created : new Date(e.submitted).toLocaleDateString("en-US")
-        }
-      })
+      this.dataSource = this.normalizer.toPeople(data)})
+  }
+  getDiscipulosFiltered(sysId:string){
+    const testing = this.peopleService.getNewPeopleByCoach$(sysId).subscribe((data) => {
+      this.dataSource = this.normalizer.toPeople(data);
+      console.log(this.dataSource);
     })
   }
 }

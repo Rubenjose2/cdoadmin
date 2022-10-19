@@ -10,18 +10,22 @@
         <div class="main-container-consolidation">
             <div class="card-consolidador" *ngFor="let cons of consolidador;let i= index" >
                 <mat-card dndDropzone
-                (dndDrop)="onDrop($any($event), i)"
+                (dndDrop)="onDrop($any($event), cons.id)"
+                matBadge={{cons.coaching}}
+                [matBadgeHidden]="cons.coaching == 0"
+                (click)="openInformation(cons.id)"
                 >
-                    {{cons.name}} {{cons.last_name}} {{i}}
+                    {{cons.data.name}} {{cons.data.last_name}}
                 </mat-card>
             </div>
             
         </div>
         <div class="main-container-people">
-            <div class="example-list">
-                <div *ngFor="let people of peopleModel">
-                    <mat-card [dndDraggable]="people.firstName">
-                        <!-- {{people.firstName}}  {{people.lastName}} -->
+            <div>
+                <div class="card-people" *ngFor="let people of peopleModel">
+                    <mat-card [dndDraggable]="people.sysId">
+                        {{people.name}}  {{people.last_name}}
+                        <div class="age-display">Age Range {{people.age}}</div>
                     </mat-card>
               </div>
         </div>
