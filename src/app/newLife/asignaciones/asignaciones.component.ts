@@ -49,9 +49,13 @@ export class AsignacionesComponent implements OnInit {
     console.log(this.consolidador);
   }
 
-  onDrop(event:DndDropEvent, i:any){
-    this.peopleService.updateConsolidador(i,event.data);
-    this.peopleService.updateNewLife(event.data,{state:'Seguimiento', coach:i})
+  onDrop(event:DndDropEvent, coach:any){
+    this.peopleService.updateConsolidador(coach.id,event.data);
+    this.peopleService.updateNewLife(event.data,{state:'Seguimiento', coach:{
+      id:coach.id,
+      name:coach.data.name,
+      last_name:coach.data.last_name
+    }})
     this.getConsolidadoresList();
   }
 

@@ -22,6 +22,8 @@ export class NewPeopleComponent implements OnInit {
     'PhoneNumber',
     'Email',
     'ageRange',
+    'coach',
+    'state',
     'Created',
     'Action'
   ]
@@ -45,10 +47,15 @@ export class NewPeopleComponent implements OnInit {
 
   drop(element:any){
     console.log(element);
+    if(this.sysId){
+      this.peopleService.removePeopleFromNewLife(this.sysId,element.id)
+    }
+    
   }
 
   getDiscipulosList(){
     this.peopleService.getNewPeople$().subscribe(data =>{
+      console.log(data);
       this.dataSource = this.normalizer.toPeople(data)})
   }
   getDiscipulosFiltered(sysId:string){

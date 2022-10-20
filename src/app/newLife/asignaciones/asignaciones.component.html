@@ -1,16 +1,16 @@
 <!-- This section it's going to be selector | A B C ... -->
 <div class="main-container">
     <div class="main-container-selector">
-        The selector Go here
+        
         <div>
-            A  B  C  D  E
+           
         </div>
     </div>
     <div class="main-container-transaction" >
         <div class="main-container-consolidation">
             <div class="card-consolidador" *ngFor="let cons of consolidador;let i= index" >
                 <mat-card dndDropzone
-                (dndDrop)="onDrop($any($event), cons.id)"
+                (dndDrop)="onDrop($any($event), cons)"
                 matBadge={{cons.coaching}}
                 [matBadgeHidden]="cons.coaching == 0"
                 (click)="openInformation(cons.id)"

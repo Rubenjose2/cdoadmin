@@ -28,7 +28,7 @@ export interface PeopleRaw {
     phone?:string,
     age?:string,
     submitted?:any,
-    NewLife?:[]
+    NewLife?:{}
 }
 
 export interface PeopleNormalized {
@@ -38,7 +38,8 @@ export interface PeopleNormalized {
     email?: string,
     phone?: string,
     age?:string,
-    created?: string
+    NewLife?:{},
+    created?: {}
 }
 
 export class Normalizer {
@@ -50,6 +51,7 @@ export class Normalizer {
             email: peopleObject.email,
             phone: peopleObject.phone,
             age: peopleObject.age,
+            NewLife:peopleObject?.NewLife,
             created : new Date(peopleObject.submitted).toLocaleDateString("en-US")
         }))
     }

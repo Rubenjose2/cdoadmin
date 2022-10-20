@@ -39,7 +39,7 @@ export class PeopleService {
 
   getNewPeople$():Observable<any>{
     return this.db.collection('people', ref => ref
-      .orderBy('name')
+      .orderBy('submitted','desc')
       .where('source', '==','bienvenido')
       ).valueChanges({idField:'sysId'});
   }
@@ -49,7 +49,6 @@ export class PeopleService {
     return this.db.collection('people').doc(coachId).valueChanges({idField:'sysId'}).pipe(
       switchMap((r:any) => {
         data = r;
-        console.log(data);
         const docs = r['NewLife'].map(
           (item:any) => this.db.collection('people').doc(item).valueChanges({idField:'sysId'})
         )
@@ -59,7 +58,7 @@ export class PeopleService {
   }
 
   getPeopleByDiscipulos$():Observable<any>{
-    return this.db.collection("people", ref => ref.where('source','==','discipuladores'))
+    return this.db.collection("people", ref => ref.where('source','==','discipuladores').orderBy('submitted'))
     .valueChanges({idField:'peopleId'});
   }
 
@@ -85,6 +84,11 @@ export class PeopleService {
       servicios: arrayRemove(removeArea)
     })
   }
+  removePeopleFromNewLife(id:string,cochee:string){
+    console.log(id)
+    console.log(cochee);
+    this.db.collection('people').doc(id).update({NewLife: arrayRemove(cochee)});
+  }
   updatePeople(id:string, peopleObj:PeopleModel){
     this.db.collection('people').doc(id).update(peopleObj);
     //search for subcollection update or create
@@ -100,7 +104,7 @@ export class PeopleService {
     })
   }
 
-  updateNewLife(id:string, newLifeObj:NewLife){
+  updateNewLife(id:string,newLifeObj:NewLife){
     this.db.collection('people').doc(id).update({NewLife:newLifeObj});
   }
 

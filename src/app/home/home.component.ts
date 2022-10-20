@@ -85,9 +85,7 @@ export class HomeComponent implements OnInit {
   }
 
   openCollapse(index:number){
-    console.log(index)
     this.menuItems[index].show = !this.menuItems[index].show
-    console.log(this.menuItems);
   }
 
   logOut(){
