@@ -1,4 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Normalizer} from 'src/app/helpers/people.model';
 import { PeopleService } from 'src/app/services/people.service';
@@ -10,11 +13,14 @@ import { PeopleService } from 'src/app/services/people.service';
 })
 export class NewPeopleComponent implements OnInit {
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
   @Input () sysId: string = '';
   title = ''
   filtered!:boolean
 
-  dataSource:any = [];
+  dataSource!:MatTableDataSource<any>
 
   displayedColumns: string[] = [
     'No',
@@ -41,27 +47,34 @@ export class NewPeopleComponent implements OnInit {
   }
 
   clickedRow(row:any) {
-    console.log(row)
     this.router.navigate(['../../people'],{ queryParams: {sys_id : row.id}});
   }
 
   drop(element:any){
-    console.log(element);
     if(this.sysId){
       this.peopleService.removePeopleFromNewLife(this.sysId,element.id)
     }
-    
   }
-
   getDiscipulosList(){
     this.peopleService.getNewPeople$().subscribe(data =>{
-      console.log(data);
-      this.dataSource = this.normalizer.toPeople(data)})
+      this.dataSource = new MatTableDataSource(this.normalizer.toPeople(data))
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    })
   }
   getDiscipulosFiltered(sysId:string){
     const testing = this.peopleService.getNewPeopleByCoach$(sysId).subscribe((data) => {
-      this.dataSource = this.normalizer.toPeople(data);
-      console.log(this.dataSource);
+      this.dataSource = new MatTableDataSource(this.normalizer.toPeople(data));
     })
+  }
+
+  //-------Mat Table --------//
+  applyFilter(event: Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

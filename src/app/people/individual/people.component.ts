@@ -8,6 +8,9 @@ import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
 import { map, Observable, startWith } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Location } from '@angular/common';
+import { PeopleBasicInfo } from 'src/app/helpers/people.model';
+import { doc } from 'firebase/firestore';
 
 export interface TabItems {
   label: string,
@@ -41,7 +44,8 @@ export class PeopleComponent implements OnInit {
     private peopleService: PeopleService,
     private route : ActivatedRoute,
     private workinService: ServiceAreasService,
-    private _snackbar : MatSnackBar
+    private _snackbar : MatSnackBar,
+    private location: Location
     ) {
 
     }
@@ -150,6 +154,17 @@ export class PeopleComponent implements OnInit {
     this.openSnackBar('Usuario actualizado', 'Cerrar');
   }
 
+  save(){
+    console.log(this.peopleForm.value);
+    const basicInfor = this.peopleForm.value;
+    this.peopleService.updatePeopleBasicInfo(this.peopleidParam,this._convertBasicPeople(basicInfor)).then(()=> this.openSnackBar('Usuario actualizado', 'Cerrar'));
+  }
+
+  delete(){
+    this.peopleService.deletePeople(this.peopleidParam);
+    this.location.back();
+  }
+
   openSnackBar(message:string, action:string){
     this._snackbar.open(message,action, {duration: 3000});
   }
@@ -166,5 +181,23 @@ export class PeopleComponent implements OnInit {
       const index = this.allWorkingAreas.indexOf()
       return array.filter((area:any) => area.name.toLowerCase() != filterValue);
     }
+  }
+
+  private _convertBasicPeople(data:FormPeople):PeopleBasicInfo{
+    return { 
+      name: data.basicInfo.name,
+      last_name: data.basicInfo.last_name,
+      email: data.basicInfo.email,
+      phone: data.basicInfo.phone
+    }
+  }
+}
+
+export interface FormPeople{
+  basicInfo: {
+    name?:string,
+    last_name?:string,
+    email?:string,
+    phone?:string
   }
 }

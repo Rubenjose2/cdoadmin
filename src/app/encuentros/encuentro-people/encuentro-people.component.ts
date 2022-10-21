@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { pipe, take } from 'rxjs';
 import { PeopleService } from 'src/app/services/people.service';
 import { Location } from '@angular/common';
@@ -31,6 +31,7 @@ export class EncuentroPeopleComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     public dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -124,6 +125,10 @@ export class EncuentroPeopleComponent implements OnInit {
 
   cancel(){
     this.location.back();
+  }
+
+  openProfile(){
+    this.router.navigate(['../../people'],{ queryParams: {sys_id : this.peopleIdParam}});
   }
 
 }

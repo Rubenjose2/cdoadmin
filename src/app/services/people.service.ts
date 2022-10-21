@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { BehaviorSubject, combineLatest, concatMap, defer, delay, every, expand, map, merge, mergeMap, Observable, of, pipe, Subject, switchMap, take, tap } from 'rxjs';
-import { PeopleModel } from '../helpers/people.model';
+import { BehaviorSubject, combineLatest, Observable, switchMap} from 'rxjs';
+import { PeopleBasicInfo, PeopleModel } from '../helpers/people.model';
 import { peopleArea } from '../helpers/areaServiceModel';
-import { doc, updateDoc, arrayUnion, arrayRemove, collection, DocumentSnapshot, QueryDocumentSnapshot, QuerySnapshot } from "firebase/firestore";
+import { arrayUnion, arrayRemove} from "firebase/firestore";
 import { NewLife } from '../helpers/newLife.model';
-import { docJoin } from '../helpers/docJoin';
-import { X } from '@angular/cdk/keycodes';
 
 
 @Injectable({
@@ -85,9 +83,8 @@ export class PeopleService {
     })
   }
   removePeopleFromNewLife(id:string,cochee:string){
-    console.log(id)
-    console.log(cochee);
     this.db.collection('people').doc(id).update({NewLife: arrayRemove(cochee)});
+    this.db.collection('people').doc(cochee).update({NewLife:{state:"Drop"}})
   }
   updatePeople(id:string, peopleObj:PeopleModel){
     this.db.collection('people').doc(id).update(peopleObj);
@@ -111,6 +108,11 @@ export class PeopleService {
   //Adding the People to Consolidadores
   updateConsolidador(id:string, peopleId:string) {
     this.db.collection('people').doc(id).update({NewLife: arrayUnion(peopleId)});
+  }
+
+  async updatePeopleBasicInfo(id:string, data:PeopleBasicInfo):Promise<any>{
+    console.log(data);
+    this.db.collection('people').doc(id).update(data);
   }
 
   deletePeople(id:string){

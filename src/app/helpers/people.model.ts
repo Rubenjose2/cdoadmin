@@ -42,6 +42,13 @@ export interface PeopleNormalized {
     created?: {}
 }
 
+export interface PeopleBasicInfo {
+    name?:string,
+    last_name?:string,
+    phone?:string,
+    email?:string
+}
+
 export class Normalizer {
     toPeople(peopleObjects:PeopleRaw[]):PeopleNormalized[]{
         return peopleObjects.map((peopleObject) => ({
