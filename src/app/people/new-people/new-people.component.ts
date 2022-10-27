@@ -52,7 +52,9 @@ export class NewPeopleComponent implements OnInit {
 
   drop(element:any){
     if(this.sysId){
-      this.peopleService.removePeopleFromNewLife(this.sysId,element.id)
+      this.peopleService.removePeopleFromNewLife(this.sysId,element.id).then(() =>
+        this.getDiscipulosFiltered(this.sysId)
+      )
     }
   }
   getDiscipulosList(){

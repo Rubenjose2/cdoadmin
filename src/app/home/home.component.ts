@@ -47,6 +47,14 @@ export class HomeComponent implements OnInit {
             'type':'mujeres'
           }
         },
+        {
+          name:'Jovenes',
+          route: 'encuentros',
+          queryParams: 
+          {
+            'type':'jovenes'
+          }
+        },
       ]
     },
     {

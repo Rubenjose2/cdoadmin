@@ -82,7 +82,7 @@ export class PeopleService {
       servicios: arrayRemove(removeArea)
     })
   }
-  removePeopleFromNewLife(id:string,cochee:string){
+  async removePeopleFromNewLife(id:string,cochee:string):Promise<any>{
     this.db.collection('people').doc(id).update({NewLife: arrayRemove(cochee)});
     this.db.collection('people').doc(cochee).update({NewLife:{state:"Drop"}})
   }
