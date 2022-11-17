@@ -4,7 +4,7 @@ export class Roles {
     finance?:     boolean;
     editor?:      boolean;
     user?:        boolean;
-  
+
     constructor(){
       this.superAdmin = false;
       this.admin = false;
@@ -13,13 +13,19 @@ export class Roles {
       this.user = true;
     }
   }
-  
+
+  export class Role {
+    constructor() {
+      ['user']
+    }
+  }
+
   export interface Status {
     active?:    boolean;
     inactive?:  boolean;
     pending?:   boolean;
   }
-  
+
   export interface UserModel {
     uid?:         string;
     firstName?:   string;
@@ -29,11 +35,12 @@ export class Roles {
     email?:       string;
     avatar?:      string;
     status?:      Status;
-    roles?:        Roles ;
+    roles?:        Roles;
+    role?:          Role;
   }
-  
+
   export class RolesManagement {
-  
+
     constructor(private roles: Roles = {
       superAdmin:  true,
       admin:       true,
@@ -41,7 +48,7 @@ export class Roles {
       editor:      true,
       user:        true
     }){}
-  
+
     public rolesIndexation() {
       return this.roles;
     }

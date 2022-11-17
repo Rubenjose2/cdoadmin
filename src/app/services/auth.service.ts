@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import firebase from 'firebase/compat/app';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
 import { UserModel,Roles } from '../helpers/user.model';
@@ -22,7 +23,7 @@ export class AuthService {
     private db: AngularFirestore,
     private route: Router,
     private userService: UsersService
-  ) { 
+  ) {
     this.userData$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if(user){
@@ -40,7 +41,9 @@ export class AuthService {
    * @param password
    */
 
-    login( email:string, password: string  ) {
+    async login( email:string, password: string  ) {
+      await this.afAuth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(()=>{
+      });
       this.afAuth.signInWithEmailAndPassword(email,password)
       .catch(error => {
         this.eventAuthError.next(error);
@@ -51,7 +54,7 @@ export class AuthService {
           this.autlogOut(60*60000);
           this.route.navigate(['']);
         }
-        
+
       })
     }
 
@@ -113,5 +116,5 @@ export class AuthService {
         this.userService.getUser(user?.uid).subscribe()
       })
     }
-    
+
 }

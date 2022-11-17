@@ -51,6 +51,12 @@ import { NewLifeComponent } from './people/partials/new-life/new-life.component'
 import {MatBadgeModule} from '@angular/material/badge';
 import { NavigatorComponent } from './partials/navigator/navigator.component';
 import { Normalizer } from './helpers/people.model';
+import { CreckPermissionDirectiveDirective } from './helpers/creck-permission-directive.directive';
+import { MyassignsComponent } from './newLife/myassigns/myassigns.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from '@auth0/angular-jwt';
+import { InterceptInterceptor } from './guard/intercept.interceptor';
+import { ErrorNotFoundComponent } from './helpers/error-not-found/error-not-found.component';
 
 
 
@@ -77,14 +83,17 @@ import { Normalizer } from './helpers/people.model';
     LogoutComponent,
     NewPeopleComponent,
     NewLifeComponent,
-    NavigatorComponent
-    
+    NavigatorComponent,
+    CreckPermissionDirectiveDirective,
+    MyassignsComponent,
+    ErrorNotFoundComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSliderModule,  
+    MatSliderModule,
     MatTableModule,
     MatToolbarModule,
     MatSidenavModule,
@@ -116,10 +125,13 @@ import { Normalizer } from './helpers/people.model';
     DndModule,
     MatBadgeModule,
 
-    
-    
+
+
     ],
-  providers: [Normalizer],
+  providers: [
+    Normalizer,
+    { provide:HTTP_INTERCEPTORS, useClass: InterceptInterceptor,multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

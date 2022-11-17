@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { PermissionService } from '../services/permission.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class HomeComponent implements OnInit {
   collapse:boolean = true;
-  constructor(private authService: AuthService, private route: Router) { }
+  constructor(private authService: AuthService, private route: Router, private permissions: PermissionService) { }
 
   menuItems = [
     {
@@ -17,24 +18,28 @@ export class HomeComponent implements OnInit {
       route: '',
       icon: 'fa-solid fa-house',
       submenu: false,
-      show:false
+      show:false,
+      permission:['user']
     },
     {
       name: 'Users',
       route:'users',
       icon:'fa-solid fa-users',
       submenu: false,
-      show:false
+      show:false,
+      permission:['superAdmin']
     },
     {
       name: 'Encuentros',
       icon: 'fa-solid fa-hands-praying',
       submenu: true,
       show:false,
+      permission:['admin'],
       submenus :[
         {
           name:'Varones',
           route: 'encuentros',
+          permission: ['admin'],
           queryParams: {
             'type':'varones'
           }
@@ -42,7 +47,8 @@ export class HomeComponent implements OnInit {
         {
           name:'Mujeres',
           route: 'encuentros',
-          queryParams: 
+          permission: ['admin'],
+          queryParams:
           {
             'type':'mujeres'
           }
@@ -50,7 +56,8 @@ export class HomeComponent implements OnInit {
         {
           name:'Jovenes',
           route: 'encuentros',
-          queryParams: 
+          permission: ['admin'],
+          queryParams:
           {
             'type':'jovenes'
           }
@@ -62,19 +69,30 @@ export class HomeComponent implements OnInit {
       icon: 'fa-solid fa-dove',
       submenu: true,
       show:false,
+      permission:['admin','user'],
       submenus:[
         {
+          name:'Mis Seguimientos',
+          permission: ['user','admin','coach'],
+          route:'newlife/myassigns',
+
+        },
+        {
           name:'Convertidos/Invidatos',
-          route:'newlife/newpeople'
+          permission: ['admin'],
+          route:'newlife/newpeople',
+
         },
         {
           name: 'Asignaciones',
           route:'newlife/asignaciones',
+          permission: ['admin'],
           queryParams: {}
         },
         {
           name:'Consolidadores',
           route:'newlife/discipuladores',
+          permission: ['admin'],
           queryParams: {}
         }
       ]
@@ -83,14 +101,14 @@ export class HomeComponent implements OnInit {
       name: 'Logout',
       icon: 'fa-solid fa-right-from-bracket',
       show:false,
-      submenu: true
+      route:'logout',
+      submenu: false,
+      permission:['user']
     }
 
   ]
-  
-  ngOnInit(): void {
 
-  }
+  ngOnInit(): void {}
 
   openCollapse(index:number){
     this.menuItems[index].show = !this.menuItems[index].show
@@ -98,7 +116,7 @@ export class HomeComponent implements OnInit {
 
   logOut(){
     this.authService.logout().then( () =>
-      this.route.navigate(['/login'])
+      this.route.navigate(['/logout'])
     );
   }
 

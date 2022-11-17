@@ -10,28 +10,29 @@
             <div class="sidebar">
                 <ul>
                     <li *ngFor="let item of menuItems; let i=index">
+                      <span *appCheckPermission="item.permission">
                         <div *ngIf="!item.submenu;else showOption">
-                            <a [routerLink]="item.route">
-                                <span class="icon"><i class="{{item.icon}}"></i></span>{{item.name}}
-                            </a>
+                          <a [routerLink]="item.route">
+                            <span class="icon"><i class="{{item.icon}}"></i></span>{{item.name}}
+                          </a>
                         </div>
                         <ng-template #showOption>
-                            <a href="javascript:void(0);" (click)="openCollapse(i)">
-                                <span class="icon"> <i class="{{item.icon}}"></i></span>{{item.name}}
-                            </a>
+                          <a href="javascript:void(0);" (click)="openCollapse(i)">
+                            <span class="icon"> <i class="{{item.icon}}"></i></span>{{item.name}}
+                          </a>
                         </ng-template>
                         <ul *ngIf="item.show">
-                            <li *ngFor=" let submenu of item.submenus">
-                                <a [routerLink]="submenu.route" [queryParams]="submenu.queryParams">{{submenu.name}}</a>
-                            </li>
+                          <li *ngFor=" let submenu of item.submenus">
+                            <a *appCheckPermission="submenu.permission" [routerLink]="submenu.route" [queryParams]="submenu.queryParams">{{submenu.name}}</a>
+                          </li>
                         </ul>
- 
+                      </span>
                     </li>
                 </ul>
             </div>
         </div>
 
-        
+
     </mat-sidenav>
     <mat-sidenav-content>
         <app-menu></app-menu>

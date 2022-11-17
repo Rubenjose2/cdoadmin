@@ -15,6 +15,8 @@ import { AsignacionesComponent } from './newLife/asignaciones/asignaciones.compo
 import { PeopleComponent } from './people/individual/people.component';
 import { LogoutComponent } from './logout/logout.component';
 import { NewPeopleComponent } from './people/new-people/new-people.component';
+import { MyassignsComponent } from './newLife/myassigns/myassigns.component';
+import { ErrorNotFoundComponent } from './helpers/error-not-found/error-not-found.component';
 
 const routes: Routes = [
   {
@@ -48,6 +50,10 @@ const routes: Routes = [
           {
             path:'asignaciones',
             component:AsignacionesComponent
+          },
+          {
+            path:'myassigns',
+            component:MyassignsComponent
           }
         ]
       },
@@ -60,7 +66,7 @@ const routes: Routes = [
         path:'logout',
         component: LogoutComponent
       },
-      
+
     ],canActivate: [AuthGuard]
   },
   {
@@ -70,6 +76,10 @@ const routes: Routes = [
   {
     path:'registration',
     component: RegistrationComponent
+  },
+  {
+    path:'**',
+    component: ErrorNotFoundComponent
   }
 ];
 
