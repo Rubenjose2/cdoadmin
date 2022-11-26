@@ -57,6 +57,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from '@auth0/angular-jwt';
 import { InterceptInterceptor } from './guard/intercept.interceptor';
 import { ErrorNotFoundComponent } from './helpers/error-not-found/error-not-found.component';
+import { AddCommentsComponent } from './newLife/myassigns/partials/add-comments/add-comments.component';
+import { HistoricalCommentsComponent } from './newLife/myassigns/partials/historical-comments/historical-comments.component';
 
 
 
@@ -86,7 +88,9 @@ import { ErrorNotFoundComponent } from './helpers/error-not-found/error-not-foun
     NavigatorComponent,
     CreckPermissionDirectiveDirective,
     MyassignsComponent,
-    ErrorNotFoundComponent
+    ErrorNotFoundComponent,
+    AddCommentsComponent,
+    HistoricalCommentsComponent
 
   ],
   imports: [

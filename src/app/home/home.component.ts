@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { P } from '@angular/cdk/keycodes';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { PermissionService } from '../services/permission.service';
@@ -10,7 +12,19 @@ import { PermissionService } from '../services/permission.service';
 })
 export class HomeComponent implements OnInit {
   collapse:boolean = true;
-  constructor(private authService: AuthService, private route: Router, private permissions: PermissionService) { }
+  screenWidth!: number;
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+
+  @HostListener('window:resize',['$event'])
+  onResize() {
+    //this.configureSideNav();
+  }
+  constructor(private authService: AuthService, private route: Router, private permissions: PermissionService) {
+    this.screenWidth = window.innerWidth;
+    window.onresize = () =>{
+      this.screenWidth = window.innerWidth;
+    }
+   }
 
   menuItems = [
     {
@@ -113,6 +127,7 @@ export class HomeComponent implements OnInit {
   openCollapse(index:number){
     this.menuItems[index].show = !this.menuItems[index].show
   }
+
 
   logOut(){
     this.authService.logout().then( () =>

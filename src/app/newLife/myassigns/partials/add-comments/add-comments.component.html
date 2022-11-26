@@ -1,0 +1,8 @@
+<form [formGroup]="commentForm">
+  <mat-form-field appearance="outline" class="card-textField">
+    <mat-label>Añadir tus comentarios</mat-label>
+    <textarea matInput formControlName="message"></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="primary" class="card-button"(click)="addComment()">Guardar</button>
+</form>
+

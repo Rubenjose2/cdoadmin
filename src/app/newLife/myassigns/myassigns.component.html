@@ -13,8 +13,11 @@
     <div>
       email: {{assignment.email}}
     </div>
-    <mat-card-content *ngIf="assignment.visible">
-      oiuoiuoiuoiuoiuoiu
+    <mat-card-content [@openClose]="assignment.visible? 'open': 'closed'"
+    class="open-close-container">
+    <!-- Adding Components -->
+      <app-add-comments [data]="assignment"></app-add-comments>
+      <app-historical-comments [data]="assignment" ></app-historical-comments>
     </mat-card-content>
     <mat-card-actions>
       <button mat-button (click)="toggle(assignment)">{{assignment.visible?'Close':'Open'}}</button>

@@ -1,5 +1,5 @@
 <mat-sidenav-container class="example-container" >
-    <mat-sidenav mode="side" opened>
+    <mat-sidenav #sidenav [opened]="screenWidth > 800" [mode]="(screenWidth > 800) ? 'side' : 'over'">
         <div class="wrapper">
             <div class="company">
                 <h2>

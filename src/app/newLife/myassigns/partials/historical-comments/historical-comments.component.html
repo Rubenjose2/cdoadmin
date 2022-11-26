@@ -1,0 +1,12 @@
+<div class="comment-container">
+  <div *ngFor="let comment of comments">
+    <mat-card class="comment-card-color">
+      <mat-card-content>
+        {{comment.comment}}
+      </mat-card-content>
+      <mat-card-footer class="comment-card-dateTime">
+        {{comment.dateTime.toDate().toDateString()}}
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>
