@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
 import { UserModel,Roles } from '../helpers/user.model';
 import { UsersService } from './users.service';
+import { QuerySnapshot } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -65,11 +66,26 @@ export class AuthService {
           userCredential.user?.updateProfile({
             displayName: user.firstName + ' ' + user.lastName
           })
-          this.insertUserData(userCredential).then(() => this.route.navigate(['']));
-
+          //this.insertUserData(userCredential).then(() => this.route.navigate(['']));
+          this.insertUserData(userCredential).then((response:any) => {
+            console.log(user.email);
+            this.searchForUserProfile(user.email).subscribe((val:any) => {
+              // If i got result from the people table I can associate with
+              if(val.size === 1){
+                //linkging the user information and the people table
+                const userCollection = this.db.firestore.collection("users")
+                userCollection.where('email','==',user.email)
+                .limit(1)
+                .get()
+                .then(query => {
+                  const data = query.docs[0];
+                  data.ref.update({user_id: val.docs[0].id})
+                });
+              }
+            });
+          });
         }
       )
-
     }
 
     private insertUserData(userCredential: any) {
@@ -84,6 +100,10 @@ export class AuthService {
         },
         roles: Object.assign({},rolesModel)
       })
+    }
+
+    private searchForUserProfile(userEmail:string){
+      return this.db.collection('people',ref => ref.where('email','==',userEmail)).get();
     }
 
     logout() {

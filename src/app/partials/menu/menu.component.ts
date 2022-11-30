@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Preference } from 'src/app/helpers/preference';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  @Input() screenInput!: number;
+
+  screenSize = new Preference;
+  @Output() menuClicked = new EventEmitter<boolean>();
+  constructor() {}
 
   ngOnInit(): void {
+  }
+
+  openMenu(){
+    this.menuClicked.emit(true);
   }
 
 }

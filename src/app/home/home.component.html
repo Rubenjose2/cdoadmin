@@ -31,14 +31,14 @@
                 </ul>
             </div>
         </div>
-
-
     </mat-sidenav>
     <mat-sidenav-content>
-        <app-menu></app-menu>
+        <app-menu
+        [screenInput]='screenWidth'
+        (menuClicked)="parentOpenMenu($event)"
+        ></app-menu>
         <div class="main-container">
             <router-outlet></router-outlet>
         </div>
-
     </mat-sidenav-content>
 </mat-sidenav-container>

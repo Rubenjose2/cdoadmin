@@ -127,6 +127,10 @@ export class HomeComponent implements OnInit {
   openCollapse(index:number){
     this.menuItems[index].show = !this.menuItems[index].show
   }
+  parentOpenMenu(event:any){
+    console.log(event)
+    this.sidenav.open()
+  }
 
 
   logOut(){
