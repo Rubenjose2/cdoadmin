@@ -1,50 +1,71 @@
-<h1>Registration Form</h1>
+<div class="registration-container">
 
-<form [formGroup]="registrationForm">
-    <mat-form-field  appearance="fill">
-        <mat-label>First Name</mat-label>
-        <input matInput type="text" formControlName="firstName">
-        <mat-error *ngIf="submitted && f['firstName'].errors">
+  <div class="row">
+    <div class="registration-title">
+      Registration Form
+    </div>
+  </div>
+
+  <div class="row">
+    <form [formGroup]="registrationForm">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>First Name | Nombre</mat-label>
+          <input matInput type="text" formControlName="firstName">
+          <mat-error *ngIf="submitted && f['firstName'].errors">
             Name required
-        </mat-error>
-    </mat-form-field>
-    <mat-form-field  appearance="fill">
-        <mat-label>Last Name</mat-label>
-        <input matInput type="text" formControlName="lastName">
-        <mat-error *ngIf="submitted && f['lastName'].errors">
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" >
+          <mat-label>Last Name | Apellido</mat-label>
+          <input matInput type="text" formControlName="lastName">
+          <mat-error *ngIf="submitted && f['lastName'].errors">
             Last Name required
-        </mat-error>
-    </mat-form-field>
-    <div>
-        <mat-form-field  appearance="fill">
-            <mat-label>Email</mat-label>
-            <input matInput type="email" formControlName="email">
-            <mat-error *ngIf="submitted && f['email'].errors">
-                Email required
-            </mat-error>
+          </mat-error>
         </mat-form-field>
-    </div>
-    <div>
-        <mat-form-field  appearance="fill">
-            <mat-label>Password</mat-label>
-            <input matInput type="password" formControlName="password">
-            <mat-error *ngIf="submitted && f['password'].errors">
-                Password required
-            </mat-error>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email">
+          <mat-error *ngIf="submitted && f['email'].errors">
+            Email required
+          </mat-error>
         </mat-form-field>
-        <mat-form-field  appearance="fill">
-            <mat-label>Confirm Password</mat-label>
-            <input matInput type="password" formControlName="confirmPassword">
-            <mat-error *ngIf="submitted && f['confirmPassword'].errors">
-                Confirm Your Password
-            </mat-error>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Phone | Telefono</mat-label>
+          <input matInput mask="(000) 000-0000" formControlName="phone">
+          <mat-error *ngIf="submitted && f['phone'].errors">
+            Phone required
+          </mat-error>
         </mat-form-field>
-    </div>
-    <div>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password">
+          <mat-error *ngIf="submitted && f['password'].errors">
+            Password required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput type="password" formControlName="confirmPassword">
+          <mat-error *ngIf="submitted && f['confirmPassword'].errors">
+            Confirm Your Password
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
         <section>
-            <div>
-                <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Register</button>
-            </div>
+          <div>
+            <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Register</button>
+          </div>
         </section>
-    </div>
-</form>
+      </div>
+    </form>
+  </div>
+
+</div>

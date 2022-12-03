@@ -66,7 +66,6 @@ export class AuthService {
           userCredential.user?.updateProfile({
             displayName: user.firstName + ' ' + user.lastName
           })
-          //this.insertUserData(userCredential).then(() => this.route.navigate(['']));
           this.insertUserData(userCredential).then((response:any) => {
             console.log(user.email);
             this.searchForUserProfile(user.email).subscribe((val:any) => {
@@ -82,6 +81,7 @@ export class AuthService {
                   data.ref.update({user_id: val.docs[0].id})
                 });
               }
+              this.route.navigate(['thanks']);
             });
           });
         }

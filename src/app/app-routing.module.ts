@@ -17,6 +17,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { NewPeopleComponent } from './people/new-people/new-people.component';
 import { MyassignsComponent } from './newLife/myassigns/myassigns.component';
 import { ErrorNotFoundComponent } from './helpers/error-not-found/error-not-found.component';
+import { ThanksLandPageComponent } from './users/thanks-land-page/thanks-land-page.component';
 
 const routes: Routes = [
   {
@@ -76,6 +77,10 @@ const routes: Routes = [
   {
     path:'registration',
     component: RegistrationComponent
+  },
+  {
+    path:'thanks',
+    component:ThanksLandPageComponent
   },
   {
     path:'**',

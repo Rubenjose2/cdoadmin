@@ -59,6 +59,8 @@ import { InterceptInterceptor } from './guard/intercept.interceptor';
 import { ErrorNotFoundComponent } from './helpers/error-not-found/error-not-found.component';
 import { AddCommentsComponent } from './newLife/myassigns/partials/add-comments/add-comments.component';
 import { HistoricalCommentsComponent } from './newLife/myassigns/partials/historical-comments/historical-comments.component';
+import { ThanksLandPageComponent } from './users/thanks-land-page/thanks-land-page.component';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 
 
@@ -90,7 +92,8 @@ import { HistoricalCommentsComponent } from './newLife/myassigns/partials/histor
     MyassignsComponent,
     ErrorNotFoundComponent,
     AddCommentsComponent,
-    HistoricalCommentsComponent
+    HistoricalCommentsComponent,
+    ThanksLandPageComponent
 
   ],
   imports: [
@@ -128,6 +131,7 @@ import { HistoricalCommentsComponent } from './newLife/myassigns/partials/histor
     MatSortModule,
     DndModule,
     MatBadgeModule,
+    NgxMaskModule.forRoot()
 
 
 
