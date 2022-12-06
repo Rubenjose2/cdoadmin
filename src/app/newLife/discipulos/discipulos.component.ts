@@ -34,18 +34,17 @@ export class DiscipulosComponent implements OnInit, AfterViewInit {
     'created'
   ]
 
- ngOnInit(): void { 
+ ngOnInit(): void {
 
-  
+
 }
 ngAfterViewInit():void{
   this.getDiscipulosList();
-  
+
 }
 
   getDiscipulosList(){
     this.peopleService.getPeopleByDiscipulos$().subscribe(data =>{
-      console.log(data);
       this.dataSource = new MatTableDataSource(data.map((e:any) =>{
         return {
           id: e.peopleId,

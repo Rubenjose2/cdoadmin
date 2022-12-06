@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="column-30">
     <form [formGroup]="registrationForm">
       <div>
         <mat-form-field appearance="outline">
@@ -43,6 +43,16 @@
         </mat-form-field>
       </div>
       <div>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Please select level | Selectionar su area</mat-label>
+          <mat-select formControlName="serviceArea">
+            <mat-option *ngFor="let service of serviceAreas" [value]="service">
+              {{service.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
           <input matInput type="password" formControlName="password">
@@ -58,6 +68,9 @@
           </mat-error>
         </mat-form-field>
       </div>
+      <div *ngIf="authError" class="error-message">
+        The email address is already in use by another account.
+      </div>
       <div>
         <section>
           <div>
@@ -66,6 +79,9 @@
         </section>
       </div>
     </form>
+  </div>
+  <div class="column-70">
+    <!-- <img src="https://firebasestorage.googleapis.com/v0/b/cdopeople.appspot.com/o/314707119_10158525212021152_1786604821302321452_n.jpg?alt=media&token=7d0b0204-8788-4c10-aa7a-871f4f543de7"> -->
   </div>
 
 </div>

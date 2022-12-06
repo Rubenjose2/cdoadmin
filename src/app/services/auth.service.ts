@@ -7,6 +7,8 @@ import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
 import { UserModel,Roles } from '../helpers/user.model';
 import { UsersService } from './users.service';
 import { QuerySnapshot } from 'firebase/firestore';
+import { FirebaseError } from 'firebase/app';
+import { PeopleService } from './people.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +25,8 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private db: AngularFirestore,
     private route: Router,
-    private userService: UsersService
+    private userService: UsersService,
+    private peopleService: PeopleService
   ) {
     this.userData$ = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -71,21 +74,24 @@ export class AuthService {
             this.searchForUserProfile(user.email).subscribe((val:any) => {
               // If i got result from the people table I can associate with
               if(val.size === 1){
+
                 //linkging the user information and the people table
-                const userCollection = this.db.firestore.collection("users")
-                userCollection.where('email','==',user.email)
-                .limit(1)
-                .get()
-                .then(query => {
-                  const data = query.docs[0];
-                  data.ref.update({user_id: val.docs[0].id})
-                });
+                this.linkUserWithPeople(user.email,val.docs[0].id);
+
+              }else{
+                // would need to add the information into the People Table
+                const newPeople = this.peopleService.setNewPeople(user)
+                newPeople.then(val => {
+                  this.linkUserWithPeople(user.email,val.id);
+                })
               }
               this.route.navigate(['thanks']);
             });
           });
         }
-      )
+      ).catch((error:FirebaseError) => {
+        this.eventAuthError.next(error.message);
+      });
     }
 
     private insertUserData(userCredential: any) {
@@ -100,6 +106,16 @@ export class AuthService {
         },
         roles: Object.assign({},rolesModel)
       })
+    }
+    private linkUserWithPeople(email:string, userId:string) {
+      const userCollection = this.db.firestore.collection("users")
+      userCollection.where('email','==',email)
+      .limit(1)
+      .get()
+      .then(query => {
+        const data = query.docs[0];
+        data.ref.update({user_id: userId})
+      });
     }
 
     private searchForUserProfile(userEmail:string){

@@ -5,6 +5,7 @@ import { PeopleBasicInfo, PeopleModel } from '../helpers/people.model';
 import { peopleArea } from '../helpers/areaServiceModel';
 import { arrayUnion, arrayRemove} from "firebase/firestore";
 import { NewLife } from '../helpers/newLife.model';
+import { UserModel } from '../helpers/user.model';
 
 
 @Injectable({
@@ -56,7 +57,7 @@ export class PeopleService {
   }
 
   getPeopleByDiscipulos$():Observable<any>{
-    return this.db.collection("people", ref => ref.where('source','==','discipuladores').orderBy('submitted'))
+    return this.db.collection("people", ref => ref.where('source','==','discipuladores').orderBy('submitted', 'desc'))
     .valueChanges({idField:'peopleId'});
   }
 
@@ -76,6 +77,21 @@ export class PeopleService {
     this.db.collection('people').doc(id).update({
       servicios: arrayUnion(newArea)
     })
+  }
+
+  setNewPeople(user:any){
+    return this.db.collection('people').add(
+      {
+        name: user.firstName,
+        last_name: user.lastName,
+        email: user.email,
+        phone: user.phone,
+        source: (user.serviceArea.name == 'Consolidador')?'discipuladores':'local',
+        servicios: [user.serviceArea],
+        created: new Date().toISOString(),
+        submitted: new Date().toISOString()
+      }
+    )
   }
   removePeopleServiceArea(id:string,removeArea:peopleArea):void{
     this.db.collection('people').doc(id).update({

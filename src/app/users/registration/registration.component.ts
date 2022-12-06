@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { ServiceAreasService } from 'src/app/services/service-areas.service';
 
 @Component({
   selector: 'app-registration',
@@ -11,11 +12,20 @@ export class RegistrationComponent implements OnInit {
 
   registrationForm!: FormGroup;
   submitted:boolean = false;
+  authError: string | undefined;
+  serviceAreas: any;
+  value:any = '';
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private workinService: ServiceAreasService) { }
 
   ngOnInit(): void {
+    this.workinService.getWorkinAreasList().subscribe(result =>{
+      this.serviceAreas = result;
+    });
     this.createForm();
+    this.auth.eventAutError$.subscribe(error =>{
+      this.authError = error;
+    });
   }
 
   createForm(){
@@ -25,7 +35,8 @@ export class RegistrationComponent implements OnInit {
       email: new FormControl('',Validators.required),
       phone: new FormControl('',Validators.required),
       password: new FormControl('',[Validators.required,Validators.minLength(6)]),
-      confirmPassword: new FormControl('',Validators.required)
+      confirmPassword: new FormControl('',Validators.required),
+      serviceArea: new FormControl('')
     })
   }
 
@@ -41,6 +52,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   createUser(user:any){
-    this.auth.createUser(user);
+    this.auth.createUser(user)
   }
 }
