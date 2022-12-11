@@ -28,11 +28,16 @@
                 </mat-error>
               </mat-form-field>
             </div>
-      
+            <div class="forgor-password-container">
+              <span (click)="forgotPassword()">Forgot my Password | Olvide mi Contraseña</span>
+            </div>
             <div>
               <section>
                 <div>
                   <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">submit</button>
+                </div>
+                <div>
+                  <button mat-raised-button color="primary" type="submit" (click)="auth.GoogleAuth()">Using Google </button>
                 </div>
               </section>
             </div>

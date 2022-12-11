@@ -9,6 +9,7 @@ import { UsersService } from './users.service';
 import { QuerySnapshot } from 'firebase/firestore';
 import { FirebaseError } from 'firebase/app';
 import { PeopleService } from './people.service';
+import { E } from '@angular/cdk/keycodes';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +63,10 @@ export class AuthService {
       })
     }
 
+    getAuth(){
+      return this.afAuth;
+    }
+
     createUser(user:any){
       this.afAuth.createUserWithEmailAndPassword(user.email,user.password).then(
         userCredential => {
@@ -92,6 +97,12 @@ export class AuthService {
       ).catch((error:FirebaseError) => {
         this.eventAuthError.next(error.message);
       });
+    }
+
+    resetPasswordInit(email:string){
+      this.afAuth.sendPasswordResetEmail(email,
+        {url:'http://cdopeople.com/password_management'})
+        .catch(error=> console.log(error));
     }
 
     private insertUserData(userCredential: any) {
@@ -151,6 +162,20 @@ export class AuthService {
       this.afAuth.authState.subscribe(user =>{
         this.userService.getUser(user?.uid).subscribe()
       })
+    }
+
+    GoogleAuth(){
+      return this.AuthLogin(new firebase.auth.GoogleAuthProvider)
+    }
+
+    AuthLogin(provider:any){
+      return this.afAuth
+      .signInWithPopup(provider)
+      .then((userCredential)=> {
+        console.log(userCredential);
+        this.route.navigate(['']);
+      })
+      .catch(error => console.log(error))
     }
 
 }

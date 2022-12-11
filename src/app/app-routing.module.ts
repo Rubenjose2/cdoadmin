@@ -18,6 +18,8 @@ import { NewPeopleComponent } from './people/new-people/new-people.component';
 import { MyassignsComponent } from './newLife/myassigns/myassigns.component';
 import { ErrorNotFoundComponent } from './helpers/error-not-found/error-not-found.component';
 import { ThanksLandPageComponent } from './users/thanks-land-page/thanks-land-page.component';
+import { PasswordManagementComponent } from './users/password-management/password-management.component';
+import { ForgotPasswordComponent } from './users/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {
@@ -81,6 +83,14 @@ const routes: Routes = [
   {
     path:'thanks',
     component:ThanksLandPageComponent
+  },
+  {
+    path:'password_management',
+    component:PasswordManagementComponent
+  },
+  {
+    path: 'forgot_password',
+    component: ForgotPasswordComponent
   },
   {
     path:'**',

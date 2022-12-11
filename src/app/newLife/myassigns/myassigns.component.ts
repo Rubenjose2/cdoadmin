@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { coachee } from 'src/app/helpers/newLife.model';
 import { PeopleService } from 'src/app/services/people.service';
 import {AuthService} from '../../services/auth.service'
@@ -23,7 +24,11 @@ export class MyassignsComponent implements OnInit {
   assignments!: coachee[];
   openSection:boolean = false;
 
-  constructor(private authService: AuthService, private peopleService: PeopleService) {
+  constructor(
+    private authService: AuthService,
+    private peopleService: PeopleService,
+    private router: Router
+    ) {
    }
 
   ngOnInit(): void {
@@ -37,13 +42,16 @@ export class MyassignsComponent implements OnInit {
 
   getAssignment():void{
     this.authService.userData$.subscribe(user => {
-      this.peopleService.getNewPeopleByCoach$(user.user_id).subscribe(userPeople =>{
-        this.assignments = userPeople.map((element:coachee)=>{
-          return {...element,visble:false};
-        })
-        console.log(this.assignments);
+      if(user){
+        this.peopleService.getNewPeopleByCoach$(user.user_id).subscribe(userPeople =>{
+          this.assignments = userPeople.map((element:coachee)=>{
+            return {...element,visble:false};
+          })
+        }
+        )
+      }else{
+        this.router.navigate(['/login']);
       }
-      )
     })
   }
 }

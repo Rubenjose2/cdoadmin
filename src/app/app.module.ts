@@ -14,7 +14,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireAuthModule, PERSISTENCE } from '@angular/fire/compat/auth';
 import { environment } from '../environments/environment';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
@@ -61,6 +61,9 @@ import { AddCommentsComponent } from './newLife/myassigns/partials/add-comments/
 import { HistoricalCommentsComponent } from './newLife/myassigns/partials/historical-comments/historical-comments.component';
 import { ThanksLandPageComponent } from './users/thanks-land-page/thanks-land-page.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { PasswordManagementComponent } from './users/password-management/password-management.component';
+import { ForgotPasswordComponent } from './users/forgot-password/forgot-password.component';
+import { PasswordValidarorDirective } from './helpers/password-validaror.directive';
 
 
 
@@ -93,7 +96,9 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
     ErrorNotFoundComponent,
     AddCommentsComponent,
     HistoricalCommentsComponent,
-    ThanksLandPageComponent
+    ThanksLandPageComponent,
+    PasswordManagementComponent,
+    ForgotPasswordComponent
 
   ],
   imports: [
@@ -138,7 +143,8 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
     ],
   providers: [
     Normalizer,
-    { provide:HTTP_INTERCEPTORS, useClass: InterceptInterceptor,multi: true}
+    { provide:HTTP_INTERCEPTORS, useClass: InterceptInterceptor,multi: true},
+    { provide: PERSISTENCE, useValue: 'session'}
   ],
   bootstrap: [AppComponent]
 })
