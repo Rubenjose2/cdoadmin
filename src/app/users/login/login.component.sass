@@ -4,6 +4,12 @@
 
 .left-column
   grid-column: 1
+  display: flex
+  flex-direction: column
+  height: 100%
+  align-items: center
+  justify-content: center
+  background-color: #65A2A7
 
 .rigth-column
   grid-column: 2
@@ -12,16 +18,14 @@ mat-card
     height: 500px
 
 mat-card .login-container-form
-    margin-top:40px
-    margin-left:45%
-    transform: translateX(-50%)
 
 mat-card .login-container-logo
-    margin-left:45%
-    transform: translateX(-50%)
-    img
-        width: 200px
-        height: auto
+  display: flex
+  flex-direction: column
+  align-items: center
+  img
+    width: 200px
+    height: auto
 mat-card .login-container-title
     // margin-left:50%
     // transform: translateX(-50%)
@@ -31,8 +35,9 @@ mat-card .login-container-title
     width: 238px
 
 .forgor-password-container
-  font-size: 10px
+  font-size: 11px
   cursor: pointer
+  text-align: center
 
 .image-container
   background-size: cover
@@ -40,3 +45,22 @@ mat-card .login-container-title
   opacity: 40%
   height: 100vh
   background-image: url("https://firebasestorage.googleapis.com/v0/b/cdopeople.appspot.com/o/314707119_10158525212021152_1786604821302321452_n.jpg?alt=media&token=7d0b0204-8788-4c10-aa7a-871f4f543de7")
+
+.special-buttons
+  margin-top: 10px
+  min-width: 169px
+
+.button-section
+  text-align: center
+
+.main-form-fields
+  display: flex
+  flex-direction: column
+  align-items: center
+
+@media only screen and (max-width: 800px)
+  .image-container
+    background-image: unset
+  .login-container
+    display: grid
+    grid-template-columns: 100%
