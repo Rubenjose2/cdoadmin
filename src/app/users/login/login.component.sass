@@ -1,14 +1,15 @@
 .login-container
-    position: relative
-    background-color: #65A2A7
-    height: 100%
+  display: grid
+  grid-template-columns: 45% 55%
+
+.left-column
+  grid-column: 1
+
+.rigth-column
+  grid-column: 2
 mat-card
-    position: absolute
     width: 320px
     height: 500px
-    top:0%
-    right: 50%
-    transform: translate(50%,50%)
 
 mat-card .login-container-form
     margin-top:40px
@@ -32,3 +33,10 @@ mat-card .login-container-title
 .forgor-password-container
   font-size: 10px
   cursor: pointer
+
+.image-container
+  background-size: cover
+  background-repeat: no-repeat
+  opacity: 40%
+  height: 100vh
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/cdopeople.appspot.com/o/314707119_10158525212021152_1786604821302321452_n.jpg?alt=media&token=7d0b0204-8788-4c10-aa7a-871f4f543de7")
