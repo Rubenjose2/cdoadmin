@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { combineLatest, combineLatestAll, combineLatestWith, forkJoin, map, merge, mergeAll, Observable, of, switchMap, switchScan, zip } from 'rxjs';
 import { comments } from '../helpers/newLife.model';
 
 @Injectable({
@@ -21,5 +22,20 @@ export class NewLifeService {
       .where('coach','==',coach)
       .where('coachee','==',coachee))
       .valueChanges()
+  }
+
+  getMessagesList():Observable<any>{
+    const messages$ = this.db.collection('newLifeComments', ref => ref.orderBy('dateTime','desc')).valueChanges({idField:'sysId'});
+    const coach$ = this.db.collection('people').valueChanges({idField:'sysId'});
+
+    return zip (messages$, coach$).pipe(
+      map(([messages,coaches]) => {
+        return messages.map((message:any, index)=> ({
+          ...message,
+          coach: coaches.reduce((acc,el) => {return el.sysId == message.coach ? el : acc},{}),
+          coachee: coaches.reduce((acc,el) => {return el.sysId == message.coachee ? el : acc},{})
+        }))
+      })
+    )
   }
 }

@@ -20,6 +20,7 @@ import { ErrorNotFoundComponent } from './helpers/error-not-found/error-not-foun
 import { ThanksLandPageComponent } from './users/thanks-land-page/thanks-land-page.component';
 import { PasswordManagementComponent } from './users/password-management/password-management.component';
 import { ForgotPasswordComponent } from './users/forgot-password/forgot-password.component';
+import { MessagesComponent } from './newLife/messages/messages.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,10 @@ const routes: Routes = [
           {
             path:'myassigns',
             component:MyassignsComponent
+          },
+          {
+            path:'messages',
+            component:MessagesComponent
           }
         ]
       },

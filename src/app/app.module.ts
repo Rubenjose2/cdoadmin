@@ -64,6 +64,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { PasswordManagementComponent } from './users/password-management/password-management.component';
 import { ForgotPasswordComponent } from './users/forgot-password/forgot-password.component';
 import { PasswordValidarorDirective } from './helpers/password-validaror.directive';
+import { MessagesComponent } from './newLife/messages/messages.component';
 
 
 
@@ -98,7 +99,8 @@ import { PasswordValidarorDirective } from './helpers/password-validaror.directi
     HistoricalCommentsComponent,
     ThanksLandPageComponent,
     PasswordManagementComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    MessagesComponent
 
   ],
   imports: [

@@ -98,6 +98,11 @@ export class HomeComponent implements OnInit {
 
         },
         {
+          name:'Seguimientos',
+          permission: ['admin'],
+          route:'newlife/messages',
+        },
+        {
           name: 'Asignaciones',
           route:'newlife/asignaciones',
           permission: ['admin'],
