@@ -65,6 +65,7 @@ import { PasswordManagementComponent } from './users/password-management/passwor
 import { ForgotPasswordComponent } from './users/forgot-password/forgot-password.component';
 import { PasswordValidarorDirective } from './helpers/password-validaror.directive';
 import { MessagesComponent } from './newLife/messages/messages.component';
+import { WelcomeComponent } from './people/welcome/welcome.component';
 
 
 
@@ -100,7 +101,8 @@ import { MessagesComponent } from './newLife/messages/messages.component';
     ThanksLandPageComponent,
     PasswordManagementComponent,
     ForgotPasswordComponent,
-    MessagesComponent
+    MessagesComponent,
+    WelcomeComponent
 
   ],
   imports: [

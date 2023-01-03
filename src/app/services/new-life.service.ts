@@ -16,6 +16,17 @@ export class NewLifeService {
     return this.db.collection(this.path).doc().set(comment)
   }
 
+  setMessageReadStatus(sysId:string){
+    this.db.collection(this.path).doc(sysId).update(
+      {
+        audit:{
+          status: 'read',
+          date: Date()
+        }
+      }
+    )
+  }
+
   getCommentByCoach(coach:string, coachee:string){
     return this.db.collection(this.path, ref => ref
       .orderBy('dateTime','desc')

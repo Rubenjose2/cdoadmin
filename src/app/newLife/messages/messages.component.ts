@@ -37,9 +37,8 @@ export class MessagesComponent implements OnInit {
         Coach: [el.coach.name,el.coach.last_name].join(' '),
         Date: el.dateTime.toDate().toDateString(),
         comment: el.comment,
-        Status: 'New',
-        sys_id: el.sysId
-
+        Status: (!el.audit) ? 'New':'Read',
+        sys_id: el.sysId,
         }
       })
     })
@@ -47,7 +46,7 @@ export class MessagesComponent implements OnInit {
 
 
   updateStatus(element:any){
-    console.log(element);
+    this.newLifeService.setMessageReadStatus(element.sys_id);
   }
 
 }
