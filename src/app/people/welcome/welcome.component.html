@@ -1,1 +1,91 @@
-<p>welcome works!</p>
+<div class="welcome-container">
+  <mat-card>
+    <div class="title">
+      Bienvenido | Welcome
+    </div>
+    <div>
+      <form [formGroup]="welcomeForm">
+        <!-- Basic information  -->
+        <div formGroupName="basicInfo">
+          <div>
+            Contact Information
+          </div>
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>Nombre | Name</mat-label>
+              <input matInput formControlName="name">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Apellido | Last Name</mat-label>
+              <input matInput formControlName="last_name">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="column-100" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field  class="column-100" appearance="outline">
+              <mat-label>Teléfono | Phone</mat-label>
+              <input matInput formControlName="phone">
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div formGroupName="addressInfo">
+          <div>
+            Additional Information
+          </div>
+          <div>
+            <div>
+              <mat-form-field class="column-100" appearance="outline">
+                <mat-label>Dirección | Address</mat-label>
+                <input matInput formControlName="address">
+              </mat-form-field>
+            </div>
+            <mat-form-field appearance="outline">
+              <mat-label>Ciudad | City</mat-label>
+              <input matInput formControlName="city">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>Codigo Postal | ZipCode</mat-label>
+              <input matInput formControlName="zipCode">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Estado | State</mat-label>
+              <input matInput formControlName="state">
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div formGroupName="extraInfo">
+          <div>
+            <mat-form-field class="column-100" appearance="outline">
+              <mat-label>Me gustaria mas información | I'D like more information about</mat-label>
+              <mat-select formControlName="iWant">
+                <mat-option *ngFor="let iWant of iWantOptions" [value]="iWant">
+                  {{iWant}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="column-100" appearance="outline">
+              <mat-label>Yo soy | I'm</mat-label>
+              <mat-select formControlName="iAm">
+                <mat-option *ngFor="let iAmOption of iAmOptions" [value]="iAmOption">
+                  {{iAmOption}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-card>
+</div>

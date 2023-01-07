@@ -21,6 +21,7 @@ import { ThanksLandPageComponent } from './users/thanks-land-page/thanks-land-pa
 import { PasswordManagementComponent } from './users/password-management/password-management.component';
 import { ForgotPasswordComponent } from './users/forgot-password/forgot-password.component';
 import { MessagesComponent } from './newLife/messages/messages.component';
+import { WelcomeComponent } from './people/welcome/welcome.component';
 
 const routes: Routes = [
   {
@@ -84,6 +85,10 @@ const routes: Routes = [
   {
     path:'registration',
     component: RegistrationComponent
+  },
+  {
+    path:'welcome',
+    component: WelcomeComponent
   },
   {
     path:'thanks',
