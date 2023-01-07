@@ -54,7 +54,7 @@
           <div>
             <mat-form-field appearance="outline">
               <mat-label>Codigo Postal | ZipCode</mat-label>
-              <input matInput formControlName="zipCode">
+              <input matInput maxlength="5" formControlName="zipCode">
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>Estado | State</mat-label>
@@ -84,6 +84,24 @@
               </mat-select>
             </mat-form-field>
           </div>
+          <div>
+            <div class="section-divider">
+              <mat-label>Prefiero comunicacion en | I prefer communication in </mat-label>
+            </div>
+            <div class="section-divider">
+              <mat-radio-group formControlName="language">
+                <mat-radio-button value="english">English</mat-radio-button>
+                <mat-radio-button value="spanish">Español</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+        <div>
+          <section>
+            <div>
+              <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Register</button>
+            </div>
+          </section>
         </div>
       </form>
     </div>

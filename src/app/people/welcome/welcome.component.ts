@@ -46,9 +46,14 @@ export class WelcomeComponent implements OnInit {
       }),
       extraInfo: new FormGroup({
         iAm: new FormControl('',Validators.required),
-        iWant: new FormControl('',Validators.required)
+        iWant: new FormControl('',Validators.required),
+        language: new FormControl('')
       })
     })
+  }
+
+  onSubmit(){
+    console.log(this.welcomeForm)
   }
 
 }
