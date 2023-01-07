@@ -7,7 +7,7 @@
       <form [formGroup]="welcomeForm">
         <!-- Basic information  -->
         <div formGroupName="basicInfo">
-          <div>
+          <div class="second-title">
             Contact Information
           </div>
           <div>
@@ -29,13 +29,13 @@
           <div>
             <mat-form-field  class="column-100" appearance="outline">
               <mat-label>Teléfono | Phone</mat-label>
-              <input matInput formControlName="phone">
+              <input matInput mask="(000) 000-0000" formControlName="phone">
             </mat-form-field>
           </div>
 
         </div>
         <div formGroupName="addressInfo">
-          <div>
+          <div class="second-title">
             Additional Information
           </div>
           <div>
@@ -45,7 +45,7 @@
                 <input matInput formControlName="address">
               </mat-form-field>
             </div>
-            <mat-form-field appearance="outline">
+            <mat-form-field class="column-100" appearance="outline">
               <mat-label>Ciudad | City</mat-label>
               <input matInput formControlName="city">
             </mat-form-field>
