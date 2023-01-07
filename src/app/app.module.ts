@@ -66,6 +66,7 @@ import { ForgotPasswordComponent } from './users/forgot-password/forgot-password
 import { PasswordValidarorDirective } from './helpers/password-validaror.directive';
 import { MessagesComponent } from './newLife/messages/messages.component';
 import { WelcomeComponent } from './people/welcome/welcome.component';
+import {MatStepContent, MatStepperModule} from '@angular/material/stepper';
 
 
 
@@ -134,6 +135,7 @@ import { WelcomeComponent } from './people/welcome/welcome.component';
     DragDropModule,
     MatTabsModule,
     MatChipsModule,
+    MatStepperModule,
     MatAutocompleteModule,
     MatCheckboxModule,
     MatPaginatorModule,
