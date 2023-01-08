@@ -66,10 +66,9 @@ import { ForgotPasswordComponent } from './users/forgot-password/forgot-password
 import { PasswordValidarorDirective } from './helpers/password-validaror.directive';
 import { MessagesComponent } from './newLife/messages/messages.component';
 import { WelcomeComponent } from './people/welcome/welcome.component';
-import {MatStepContent, MatStepperModule} from '@angular/material/stepper';
-
-
-
+import {MatStepperModule} from '@angular/material/stepper';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete'
 
 //Import from Firebase
 
@@ -142,10 +141,9 @@ import {MatStepContent, MatStepperModule} from '@angular/material/stepper';
     MatSortModule,
     DndModule,
     MatBadgeModule,
+    GoogleMapsModule,
+    GooglePlaceModule,
     NgxMaskModule.forRoot()
-
-
-
     ],
   providers: [
     Normalizer,

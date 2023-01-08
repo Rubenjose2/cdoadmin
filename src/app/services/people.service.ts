@@ -93,6 +93,23 @@ export class PeopleService {
       }
     )
   }
+
+  setNewPeopleWelcome(user:any){
+    console.log(user)
+    return this.db.collection('people').add(
+      {
+        name: user.basicInfo.name,
+        last_name: user.basicInfo.last_name,
+        email: user.basicInfo.email,
+        phone: user.basicInfo.phone,
+        addressInfo: user.addressInfo,
+        extraInfo: user.extraInfo,
+        source:'welcome',
+        created: new Date()
+
+      }
+    )
+  }
   removePeopleServiceArea(id:string,removeArea:peopleArea):void{
     this.db.collection('people').doc(id).update({
       servicios: arrayRemove(removeArea)

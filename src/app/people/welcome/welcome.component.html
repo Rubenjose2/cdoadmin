@@ -3,7 +3,7 @@
     <div class="title">
       Bienvenido | Welcome
     </div>
-    <div>
+    <div *ngIf="!showThanks">
       <form [formGroup]="welcomeForm">
         <!-- Basic information  -->
         <div formGroupName="basicInfo">
@@ -42,7 +42,7 @@
             <div>
               <mat-form-field class="column-100" appearance="outline">
                 <mat-label>Dirección | Address</mat-label>
-                <input matInput formControlName="address">
+                <input ngx-google-places-autocomplete #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" matInput formControlName="address">
               </mat-form-field>
             </div>
             <mat-form-field class="column-100" appearance="outline">
@@ -104,6 +104,14 @@
           </section>
         </div>
       </form>
+    </div>
+    <div *ngIf="showThanks">
+      <div>
+        Gracias por enviar el formulario
+      </div>
+      <div>
+        Thanks for submitting the questionnaire
+      </div>
     </div>
   </mat-card>
 </div>

@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { PeopleService } from 'src/app/services/people.service';
+import { GooglePlaceDirective } from 'ngx-google-places-autocomplete'
+import { Address } from 'ngx-google-places-autocomplete/objects/address';
 
 @Component({
   selector: 'app-welcome',
@@ -10,6 +13,14 @@ export class WelcomeComponent implements OnInit {
 
   welcomeForm!: FormGroup;
   selectedValueIm!: string;
+  showThanks:boolean = false;
+
+  @ViewChild("placesRef") placesRef! : GooglePlaceDirective;
+
+  options = {
+    types: ['places'],
+    componentRestrictions: { country: 'US' }
+  }
 
   iAmOptions = [
     "Visita por primera vez | 1st Time guest",
@@ -24,7 +35,7 @@ export class WelcomeComponent implements OnInit {
     "Bautizarme | Getting Baptized"
   ]
 
-  constructor() { }
+  constructor(private peopleService: PeopleService) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -52,8 +63,27 @@ export class WelcomeComponent implements OnInit {
     })
   }
 
+  public handleAddressChange(address:Address){
+    //console.log(address);
+    this.welcomeForm.patchValue({
+      addressInfo: {
+        address: address.address_components[0].long_name + ' ' + address.address_components[1].long_name,
+        city: address.address_components[2].long_name,
+        state: address.address_components[4].short_name,
+        zipCode: address.address_components[6].long_name
+      }
+    })
+  }
+
+
+
   onSubmit(){
-    console.log(this.welcomeForm)
+    if(!this.welcomeForm.valid){
+      return
+    }
+    this.peopleService.setNewPeopleWelcome(this.welcomeForm.value).then(
+      () => this.showThanks = true
+    );
   }
 
 }
